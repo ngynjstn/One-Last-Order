@@ -9285,9 +9285,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511833820467474431, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -6496517055502668637, guid: 947a39183ff049c4dad29d83d56dbcb7, type: 3}
+    - target: {fileID: 2506293497402853965, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5375875810380452745, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_Name
-      value: BasicInteractObject
+      value: WindowInteract
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_Pivot.x
@@ -9331,7 +9339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.24
+      value: -1.592
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9351,11 +9359,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.54
+      value: 1.613
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.96
+      value: 5.288
       objectReference: {fileID: 0}
     - target: {fileID: 9178769520329003496, guid: 99aa83ab7f98a984e814fcfa3e6b7b80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
