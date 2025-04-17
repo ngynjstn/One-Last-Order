@@ -9,7 +9,7 @@ public class InteractionController : MonoBehaviour
 {
     [SerializeField] public float m_interactDistance = 5f;
     [SerializeField] public TextMeshProUGUI m_uiHintTextElement;
-    [SerializeField] public PlayerInput m_playerInput;
+    private PlayerInput m_playerInput;
     [SerializeField] public Camera m_playerCamera;
 
     IInteractable currentInteractableInReticle;
@@ -42,10 +42,6 @@ public class InteractionController : MonoBehaviour
                 currentInteractableInReticle = interactable;
                 m_uiHintTextElement.text = currentInteractableInReticle.InteractableHintText;
                 m_uiHintTextElement.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    currentInteractableInReticle.Interact();
-                }
             }
             else
             {
