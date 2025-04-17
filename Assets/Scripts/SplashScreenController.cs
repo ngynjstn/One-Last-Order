@@ -14,7 +14,9 @@ public class SplashScreenController : MonoBehaviour
     public float textSpeed = 0.05f;
     public float delayAfterLine = 0.5f;
     public string continuePromptText = "Press Space or Enter to Continue...";
-    public float finalFadeOutDelay = 1f; // Delay before the final fade out starts
+
+    [Header("Audio Settings")]
+    public AudioSource typewriterSoundSource; // Assign in Inspector
 
     private Image splashImage;
     private TextMeshProUGUI dialogueText;
@@ -48,7 +50,6 @@ public class SplashScreenController : MonoBehaviour
         dialogueRect.offsetMin = Vector2.zero;
         dialogueRect.offsetMax = Vector2.zero;
         dialogueText.text = "";
-        dialogueText.color = new Color(1f, 1f, 1f, 0f); // Start with transparent text
 
         GameObject continueTextGO = new GameObject("ContinueText", typeof(TextMeshProUGUI));
         continueTextGO.transform.SetParent(transform, false);
@@ -104,7 +105,8 @@ public class SplashScreenController : MonoBehaviour
             }
             else
             {
-                StopCoroutine(TypeText());
+                StopCoroutine(TypeLine());
+                typewriterSoundSource.Stop();
                 dialogueText.text = dialogueLines[index];
                 canContinue = true;
                 continueText.gameObject.SetActive(true);
@@ -116,42 +118,26 @@ public class SplashScreenController : MonoBehaviour
     {
         index = 0;
         dialogueText.text = string.Empty;
-        StartCoroutine(TypeText());
-        StartCoroutine(FadeInText()); // Start fading in the first line
+        dialogueText.color = Color.white; // Make text visible from the start
+        continueText.color = Color.white; // Make continue text visible from the start
+        StartCoroutine(TypeLine());
     }
 
-    IEnumerator FadeInText()
-    {
-        float fadeTime = textSpeed * dialogueLines[index].Length; // Approximate fade time
-        float counter = 0f;
-        Color textColor = dialogueText.color;
-
-        while (counter < fadeTime)
-        {
-            counter += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, counter / fadeTime);
-            textColor.a = alpha;
-            dialogueText.color = textColor;
-            yield return null;
-        }
-    }
-
-    IEnumerator TypeText()
+    IEnumerator TypeLine()
     {
         canContinue = false;
         continueText.gameObject.SetActive(false);
+        typewriterSoundSource.Play();
         dialogueText.text = "";
-        dialogueText.color = new Color(1f, 1f, 1f, 0f); // Reset text alpha for each line
 
         foreach (char c in dialogueLines[index].ToCharArray())
         {
             dialogueText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
-
+        typewriterSoundSource.Stop();
         canContinue = true;
         continueText.gameObject.SetActive(true);
-        StartCoroutine(FadeInText()); // Ensure full visibility after typing
     }
 
     void NextLine()
@@ -159,26 +145,24 @@ public class SplashScreenController : MonoBehaviour
         if (index < dialogueLines.Length - 1)
         {
             index++;
-            StartCoroutine(TypeText());
-            StartCoroutine(FadeInText());
+            dialogueText.text = string.Empty;
+            StartCoroutine(TypeLine());
         }
         else
         {
-            // Last line, start fading out everything
+            // Dialogue is finished, fade out everything
             dialogueActive = false;
-            StartCoroutine(FinalFadeOut());
+            StartCoroutine(FadeOut());
         }
     }
 
-    IEnumerator FinalFadeOut()
+    IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(finalFadeOutDelay); // Wait before starting the fade out
-
         float counter = 0f;
         Color panelColor = splashImage.color;
         Color textColor = dialogueText.color;
-
-        float fadeDuration = fadeInDuration; // Use the initial fade duration for consistency
+        Color continueTextColor = continueText.color;
+        float fadeDuration = fadeInDuration;
 
         while (counter < fadeDuration)
         {
@@ -186,13 +170,14 @@ public class SplashScreenController : MonoBehaviour
             float alpha = Mathf.Lerp(0f, 1f, counter / fadeDuration);
             panelColor.a = alpha;
             splashImage.color = panelColor;
-            textColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration); // Fade out text
+            textColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
             dialogueText.color = textColor;
-            continueText.color = new Color(1f, 1f, 1f, Mathf.Lerp(1f, 0f, counter / fadeDuration)); // Fade out continue text
+            continueTextColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
+            continueText.color = continueTextColor;
             yield return null;
         }
 
-        // Fade out complete, you can now load the next scene or disable this object
+        // Fade out complete
         gameObject.SetActive(false);
     }
 }
