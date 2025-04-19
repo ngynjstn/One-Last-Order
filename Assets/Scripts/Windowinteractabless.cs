@@ -17,6 +17,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private CanvasGroup fadeCanvasGroup;
 
+   
+    public static bool isFadeInUse = false;
+    private bool isInteracting = false;
+
     private void Start()
     {
         // Ensure fade canvas is hidden at the start
@@ -32,11 +36,21 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        // Prevent interaction if already interacting or fade is in use
+        if (isInteracting || isFadeInUse)
+        {
+            Debug.Log("Cannot interact with window - fade already in use");
+            return;
+        }
+
         StartCoroutine(ToggleWindowSequence());
     }
 
     private IEnumerator ToggleWindowSequence()
     {
+        isInteracting = true;
+        isFadeInUse = true;
+
         // Clear the prompt immediately, before the fade even starts
         m_interactableHintText = "";
 
@@ -64,6 +78,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
         // Fade back in
         yield return StartCoroutine(FadeTo(0f));
+
+        // Release the interaction locks
+        isInteracting = false;
+        isFadeInUse = false;
     }
 
     private void UpdateWindowAppearance()
