@@ -1,101 +1,100 @@
 using UnityEngine;
-using UnityEngine.UI;
-using DefaultNamespace;
+using TMPro;
 using System.Collections;
+using DefaultNamespace;
 
 public class DresserInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to change into work clothes";
     public string InteractableHintText => m_interactableHintText;
 
-    [SerializeField] private CanvasGroup fadePanel; // Black panel for fading
-    [SerializeField] private Text messageText; // Message text component
-    [SerializeField] private float fadeDuration = 1.0f;
-    [SerializeField] private float blackScreenDuration = 1.0f;
-    [SerializeField] private float messageDisplayTime = 3.0f;
+    [Header("Fade Settings")]
+    [SerializeField] private float fadeDuration = 1f;
 
-    private bool isDressed = false;
-    private bool isFading = false;
+    [Header("UI References")]
+    [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private TextMeshProUGUI clothesMessageText;
 
-    public bool IsDressed => isDressed;
+    [Header("Message Settings")]
+    [SerializeField] private float messageDisplayDuration = 2f;
+    [SerializeField] private string clothesChangedMessage = "You have changed into your work clothes";
+
+    private bool hasChangedClothes = false;
 
     private void Start()
     {
-        // Ensure panel is invisible at start
-        if (fadePanel != null)
+        // Ensure everything is hidden at the start
+        if (fadeCanvasGroup != null)
         {
-            fadePanel.alpha = 0;
+            fadeCanvasGroup.alpha = 0f;
+            fadeCanvasGroup.blocksRaycasts = false;
         }
 
-        // Ensure message is hidden at start
-        if (messageText != null)
+        if (clothesMessageText != null)
         {
-            messageText.gameObject.SetActive(false);
+            clothesMessageText.gameObject.SetActive(false);
         }
     }
 
+    // Implementing the Interact method from IInteractable interface
     public void Interact()
     {
-        Debug.Log("DresserInteractable.Interact() was called.");
-
-        if (!isDressed && !isFading)
+        if (!hasChangedClothes)
         {
-            StartCoroutine(ChangeClothes());
+            hasChangedClothes = true;
+            StartCoroutine(ChangeClothesSequence());
         }
     }
 
-    private IEnumerator ChangeClothes()
+    private IEnumerator ChangeClothesSequence()
     {
-        isFading = true;
+        Debug.Log("Changing clothes...");
 
-        // Make sure fade panel is active
-        fadePanel.gameObject.SetActive(true);
+        // 1. Fade to black smoothly
+        yield return StartCoroutine(FadeTo(1f));
 
-        // Fade to black (completely black)
-        float timer = 0;
-        while (timer < fadeDuration)
+        // 2. Short pause while black
+        yield return new WaitForSeconds(0.5f);
+
+        // 3. Fade back in
+        yield return StartCoroutine(FadeTo(0f));
+
+        // 4. Show message after fade in
+        clothesMessageText.gameObject.SetActive(true);
+        clothesMessageText.text = clothesChangedMessage;
+
+        // 5. Display message for specified duration
+        yield return new WaitForSeconds(messageDisplayDuration);
+
+        // 6. Hide message
+        clothesMessageText.gameObject.SetActive(false);
+
+        // 7. Clear the interaction hint text to hide the prompt
+        // This is the same approach used in TVInteractable
+        m_interactableHintText = "";
+
+        Debug.Log("Clothes changed complete.");
+    }
+
+    private IEnumerator FadeTo(float targetAlpha)
+    {
+        float startAlpha = fadeCanvasGroup.alpha;
+        float time = 0;
+
+        while (time < fadeDuration)
         {
-            timer += Time.deltaTime;
-            fadePanel.alpha = Mathf.Clamp01(timer / fadeDuration); // Ensure it goes to full 1.0
+            time += Time.deltaTime;
+            float t = time / fadeDuration;
+            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+
+            // Enable blocking raycasts when fading in, disable when fading out
+            fadeCanvasGroup.blocksRaycasts = fadeCanvasGroup.alpha > 0.5f;
+
             yield return null;
         }
 
-        // Force to completely black (just to be safe)
-        fadePanel.alpha = 1.0f;
-
-        // Hold black screen
-        yield return new WaitForSeconds(blackScreenDuration);
-
-        // Prepare the message text
-        if (messageText != null)
-        {
-            messageText.text = "You have changed into work clothes";
-            messageText.gameObject.SetActive(true);
-        }
-
-        // Start fading back in
-        timer = fadeDuration;
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            fadePanel.alpha = Mathf.Clamp01(timer / fadeDuration);
-            yield return null;
-        }
-
-        // Force to completely transparent (just to be safe)
-        fadePanel.alpha = 0.0f;
-
-        // Keep message visible for specified time
-        yield return new WaitForSeconds(messageDisplayTime);
-
-        // Hide the message
-        if (messageText != null)
-        {
-            messageText.gameObject.SetActive(false);
-        }
-
-        isDressed = true;
-        m_interactableHintText = ""; // Remove the interaction hint text
-        isFading = false;
+        // Ensure we reach exact target value
+        fadeCanvasGroup.alpha = targetAlpha;
+        fadeCanvasGroup.blocksRaycasts = targetAlpha > 0.5f;
     }
 }

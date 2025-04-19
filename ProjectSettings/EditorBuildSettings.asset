@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prolouge.unity
     guid: 63e4101da17d66e4f845a13cf1519981
   - enabled: 1
     path: Assets/Scenes/Apartment (ACT i).unity
     guid: b17bc85e15aba5b4dbee722938a0a8a0
+  - enabled: 1
+    path: Assets/Scenes/Cafe (ACT ii).unity
+    guid: 2fd24798fb8c27f4fb8d5cb761e8cb3a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
