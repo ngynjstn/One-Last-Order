@@ -7,6 +7,8 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to close window";
     public string InteractableHintText => m_interactableHintText;
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
 
     [Header("Window Properties")]
     [SerializeField] private Renderer windowGlassRenderer;
@@ -60,6 +62,7 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
         // Clear the prompt immediately, before the fade even starts
         m_interactableHintText = "";
+        m_interactable = false; // Disable interaction to prevent multiple triggers
 
         Debug.Log("Toggling window state...");
 

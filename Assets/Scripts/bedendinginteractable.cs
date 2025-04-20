@@ -7,6 +7,9 @@ public class BedInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to Sleep";
     public string InteractableHintText => m_interactableHintText;
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
+
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1.5f;

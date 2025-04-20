@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 public class DoorInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to Leave";
+
     public string InteractableHintText => m_interactableHintText;
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
+
 
     [Header("Scene Transition")]
     [SerializeField] private string nextSceneName;

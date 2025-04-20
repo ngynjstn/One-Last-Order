@@ -6,6 +6,8 @@ public class TVInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to turn off the TV";
     public string InteractableHintText => m_interactableHintText;
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
 
     [SerializeField] private Renderer screenRenderer;
     [SerializeField] private Material offMaterial;
@@ -71,6 +73,7 @@ public class TVInteractable : MonoBehaviour, IInteractable
 
             // Remove the interaction hint text after turning off
             m_interactableHintText = "";
+            m_interactable = false;
         }
     }
     public void Interact()

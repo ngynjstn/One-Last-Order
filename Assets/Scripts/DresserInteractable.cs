@@ -2,11 +2,15 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using DefaultNamespace;
+using DialogueEditor;
 
 public class DresserInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to change into work clothes";
     public string InteractableHintText => m_interactableHintText;
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
+    public NPCConversation dialogueObject;
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1f;
@@ -38,6 +42,10 @@ public class DresserInteractable : MonoBehaviour, IInteractable
 
     // Implementing the Interact method from IInteractable interface
     public void Interact()
+    {
+       ConversationManager.Instance.StartConversation(dialogueObject);
+    }
+    public void ChangeIntoClothes()
     {
         if (!hasChangedClothes)
         {

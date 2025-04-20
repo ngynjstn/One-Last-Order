@@ -565,7 +565,7 @@ namespace DialogueEditor
 
         public void PlayChooseSound()
         {
-            AudioPlayer.PlayOneShot(DialogueOptionsChooseAudio, 1f);
+            AudioPlayer.PlayOneShot(DialogueOptionsChooseAudio, 0.4f);
         }
 
         public void SpeechSelected(SpeechNode speech)

@@ -1129,6 +1129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to close window
+  m_interactable: 1
   windowGlassRenderer: {fileID: 155431562}
   openWindowGlassMaterial: {fileID: 2100000, guid: 71d769f7adb9fb54fbc9c9a4fea340ed, type: 2}
   closedWindowGlassMaterial: {fileID: 2100000, guid: 89d1e8ed49013724e8bca113f5a05467, type: 2}
@@ -5644,6 +5645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to Leave
+  m_interactable: 1
   nextSceneName: Cafe (ACT ii)
   fadeDuration: 1
   fadeCanvasGroup: {fileID: 520262061}
@@ -6821,6 +6823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to Leave
+  m_interactable: 1
   nextSceneName: Cafe (ACT ii)
   fadeDuration: 1
   fadeCanvasGroup: {fileID: 2078770339}
@@ -6923,6 +6926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to turn off the TV
+  m_interactable: 1
   screenRenderer: {fileID: 1352089631}
   offMaterial: {fileID: 2100000, guid: a4c3049f3c68bb64490ea7feede63b6e, type: 2}
   dialogueObject: {fileID: 2064052965}
@@ -7166,9 +7170,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1200, y: 800}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -7715,6 +7719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to change into work clothes
+  m_interactable: 1
   fadeDuration: 1
   fadeCanvasGroup: {fileID: 520262061}
   clothesMessageText: {fileID: 1427938132}
@@ -12339,19 +12344,7 @@ MonoBehaviour:
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1352089633}
-        m_TargetAssemblyTypeName: TVInteractable, Assembly-CSharp
-        m_MethodName: TurnOffTv
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &2064052966
 Transform:
   m_ObjectHideFlags: 0
