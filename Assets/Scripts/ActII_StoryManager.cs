@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using DialogueEditor;
 
 public class ActII_StoryManager : MonoBehaviour
 {
@@ -19,8 +20,11 @@ public class ActII_StoryManager : MonoBehaviour
     private bool customerInProgress = false;
     private GameObject currentCustomer;
 
+    public NPCConversation dialogueObject;
     private void Start()
     {
+        WaitForSeconds wait = new WaitForSeconds(5f);
+        ConversationManager.Instance.StartConversation(dialogueObject);
         StartCoroutine(StartStorySequence());
     }
 
