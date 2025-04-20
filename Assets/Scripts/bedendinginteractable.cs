@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using DefaultNamespace;
 
+
 public class BedInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_interactableHintText = "Press E to Sleep";
@@ -26,16 +27,19 @@ public class BedInteractable : MonoBehaviour, IInteractable
     [SerializeField] private float lookSideDuration = 2f; // How long to look to the side
     [SerializeField] private float lookUpDuration = 1.5f; // How long to look up at antagonist
     [SerializeField] private float jumpscareStareDuration = 5f; // How long to stare at antagonist
+    [SerializeField] private float zoomFOV = 30f; // Target field of view for the zoom during black screen
+    [SerializeField] private float zoomInDuration = 1f; // Duration of the zoom-in
 
     [Header("Camera Look Positions")]
     [SerializeField] private Vector3 lookSideRotation = new Vector3(0, 30, 0); // Left side look (positive Y value)
-    [SerializeField] private Vector3 lookUpRotation = new Vector3(30, 30, 0); // Look up and left
+    [SerializeField] private Vector3 lookUpRotation = new Vector3(30, 40, 0); // Look up and left
 
     [Header("Player References")]
     [SerializeField] private GameObject playerObject; // Reference to player GameObject
 
     private bool isSleeping = false;
     private Quaternion initialRotation;
+    private float originalFOV;
 
     private void Start()
     {
@@ -57,6 +61,17 @@ public class BedInteractable : MonoBehaviour, IInteractable
         {
             initialRotation = bedCamera.transform.rotation;
             bedCamera.gameObject.SetActive(false);
+        }
+
+        // Get initial FOV of the main camera
+        if (mainCamera != null)
+        {
+            originalFOV = mainCamera.fieldOfView;
+        }
+        else
+        {
+            Debug.LogError("Main Camera not assigned to BedInteractable!");
+            enabled = false;
         }
     }
 
@@ -99,10 +114,20 @@ public class BedInteractable : MonoBehaviour, IInteractable
         if (scareSound != null)
             scareSound.Play();
 
-        // 5. Wait in darkness
+        // 5. Zoom in the camera during the black screen
+        float zoomStartTime = Time.time;
+        while (Time.time < zoomStartTime + zoomInDuration)
+        {
+            float t = (Time.time - zoomStartTime) / zoomInDuration;
+            mainCamera.fieldOfView = Mathf.Lerp(originalFOV, zoomFOV, t);
+            yield return null;
+        }
+        mainCamera.fieldOfView = zoomFOV;
+
+        // 6. Wait in darkness (including the zoom duration)
         yield return new WaitForSeconds(blackScreenDuration);
 
-        // 6. Switch cameras and reset bed camera position
+        // 7. Switch cameras and reset bed camera position
         if (mainCamera != null)
             mainCamera.gameObject.SetActive(false);
 
@@ -112,13 +137,13 @@ public class BedInteractable : MonoBehaviour, IInteractable
             bedCamera.gameObject.SetActive(true);
         }
 
-        // 7. Fade back in to show the player in bed
+        // 8. Fade back in to show the player in bed
         yield return StartCoroutine(FadeTo(0f));
 
-        // 8. Short pause to establish the scene
+        // 9. Short pause to establish the scene
         yield return new WaitForSeconds(1f);
 
-        // 9. Slowly look to the side (window)
+        // 10. Slowly look to the side (window)
         if (bedCamera != null)
         {
             yield return StartCoroutine(RotateCamera(
@@ -127,10 +152,10 @@ public class BedInteractable : MonoBehaviour, IInteractable
                 lookSideDuration));
         }
 
-        // 10. Pause briefly to build tension
+        // 11. Pause briefly to build tension
         yield return new WaitForSeconds(0.8f);
 
-        // 11. Now look up toward where the antagonist will be
+        // 12. Now look up toward where the antagonist will be
         if (bedCamera != null)
         {
             yield return StartCoroutine(RotateCamera(
@@ -139,17 +164,12 @@ public class BedInteractable : MonoBehaviour, IInteractable
                 lookUpDuration));
         }
 
-        // 12. Wait longer while staring at the antagonist (increased duration)
+        // 13. Wait longer while staring at the antagonist (increased duration)
         yield return new WaitForSeconds(jumpscareStareDuration);
 
-        // 13. Fade to black for game end
-        yield return StartCoroutine(FadeTo(1f));
-
-        // 14. End game or load credits
-        Debug.Log("Game ending sequence complete");
-        // We don't release the fade lock since this is the end of the game
-        // SceneManager.LoadScene("Credits");
-        // Or: Application.Quit();
+        // 14. End game or load credits (You can add your end game logic here)
+        Debug.Log("Jumpscare sequence complete");
+        WindowInteractable.isFadeInUse = false; // Release the fade lock if not ending game immediately
     }
 
     private IEnumerator RotateCamera(Transform cameraTransform, Quaternion targetRotation, float duration)

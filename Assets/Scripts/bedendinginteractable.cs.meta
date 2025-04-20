@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 9a9912ea3bf007544950f80b4609b74e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fadeCanvasGroup: {instanceID: 0}
+  - jumpscareObject: {fileID: 5907681252899807961, guid: f8b6fe4a14472e44f909cc453094adba, type: 3}
+  - mainCamera: {instanceID: 0}
+  - bedCamera: {instanceID: 0}
+  - scareSound: {instanceID: 0}
+  - playerObject: {fileID: 2428940440858974989, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
