@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to Leave
   m_interactable: 1
-  nextSceneName: Apartment (ACT ii prime)
+  nextSceneName: Apartment (ACT IV)
   fadeDuration: 1
   fadeCanvasGroup: {fileID: 1276261026}
 --- !u!1 &687665042 stripped
