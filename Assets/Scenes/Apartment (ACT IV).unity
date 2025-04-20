@@ -10097,7 +10097,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: ba8485c9f7abe31419cca29d7c5ec5dc, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 70cfc45602c8c7e49a7af23ad2e01bbd, type: 2}
 --- !u!1 &1729959110 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 426399458713182891, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
@@ -11271,6 +11271,7 @@ GameObject:
   - component: {fileID: 1978465884}
   - component: {fileID: 1978465883}
   - component: {fileID: 1978465882}
+  - component: {fileID: 1978465886}
   m_Layer: 0
   m_Name: Jumpscare Camera
   m_TagString: Untagged
@@ -11301,7 +11302,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -11396,6 +11397,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -13.639, y: -91.197, z: 1.152}
+--- !u!114 &1978465886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978465881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 95a8b24008f514f43b8cf167ec13aa45, type: 2}
 --- !u!1 &1986528702 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3282339298736723286, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
@@ -12988,6 +13006,10 @@ PrefabInstance:
       propertyPath: m_uiHintTextElement
       value: 
       objectReference: {fileID: 1711195513}
+    - target: {fileID: 1799339343877208355, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2428940440858974989, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
       propertyPath: m_Name
       value: Player
