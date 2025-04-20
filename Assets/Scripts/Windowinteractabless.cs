@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using DefaultNamespace;
+using DialogueEditor;
 
 public class WindowInteractable : MonoBehaviour, IInteractable
 {
@@ -17,7 +18,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
     [SerializeField] private float fadeDuration = 1f;
     [SerializeField] private CanvasGroup fadeCanvasGroup;
 
-   
+
+    [Header("Dialogue")]
+    [SerializeField] private NPCConversation dialogueObject;
+
     public static bool isFadeInUse = false;
     private bool isInteracting = false;
 
@@ -36,6 +40,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+       ConversationManager.Instance.StartConversation(dialogueObject);
+    }
+    public void ActivateWindow()
+    {
         // Prevent interaction if already interacting or fade is in use
         if (isInteracting || isFadeInUse)
         {
@@ -45,7 +53,6 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
         StartCoroutine(ToggleWindowSequence());
     }
-
     private IEnumerator ToggleWindowSequence()
     {
         isInteracting = true;

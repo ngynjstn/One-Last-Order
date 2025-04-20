@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using DialogueEditor;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,25 @@ public class InteractionController : MonoBehaviour
 
     IInteractable currentInteractableInReticle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void OnEnable()
+    {
+        ConversationManager.OnConversationStarted += ConversationStart;
+        ConversationManager.OnConversationEnded += ConversationEnd;
+    }
+    private void OnDisable()
+    {
+        ConversationManager.OnConversationStarted -= ConversationStart;
+        ConversationManager.OnConversationEnded -= ConversationEnd;
+    }
+    private void ConversationStart()
+    {
+        m_uiHintTextElement.gameObject.SetActive(false);
+    }
+    private void ConversationEnd()
+    {
+        m_uiHintTextElement.gameObject.SetActive(false);
+    }
     public void Awake()
     {
         m_playerInput = GetComponent<PlayerInput>();
@@ -26,6 +46,11 @@ public class InteractionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ConversationManager.Instance.IsConversationActive)
+        {
+            m_uiHintTextElement.gameObject.SetActive(false);
+            return;
+        }
         CheckRaycastForInteractable();
         CheckInteractKeyPressed();
         

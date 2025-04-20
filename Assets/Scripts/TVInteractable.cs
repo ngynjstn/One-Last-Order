@@ -1,5 +1,6 @@
 using UnityEngine;
 using DefaultNamespace;
+using DialogueEditor;
 
 public class TVInteractable : MonoBehaviour, IInteractable
 {
@@ -9,6 +10,8 @@ public class TVInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Renderer screenRenderer;
     [SerializeField] private Material offMaterial;
     private bool isTurnedOff = false;
+
+    [SerializeField] private NPCConversation dialogueObject;
 
     private void Start()
     {
@@ -27,8 +30,7 @@ public class TVInteractable : MonoBehaviour, IInteractable
 
         Debug.Log("Start method - Screen renderer is " + (screenRenderer != null ? "assigned" : "NOT assigned"));
     }
-
-    public void Interact()
+    public void TurnOffTv()
     {
         Debug.Log("TVInteractable.Interact() was called.");
 
@@ -70,5 +72,9 @@ public class TVInteractable : MonoBehaviour, IInteractable
             // Remove the interaction hint text after turning off
             m_interactableHintText = "";
         }
+    }
+    public void Interact()
+    {
+        ConversationManager.Instance.StartConversation(dialogueObject);
     }
 }
