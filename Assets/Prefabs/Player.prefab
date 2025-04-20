@@ -609,8 +609,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -802,8 +802,8 @@ GameObject:
   - component: {fileID: 2802818231000415115}
   - component: {fileID: 9128714905615435067}
   - component: {fileID: 4578112376623158378}
-  - component: {fileID: 6733817669625457078}
   - component: {fileID: 4536056031300915037}
+  - component: {fileID: 2467074419428652893}
   m_Layer: 5
   m_Name: SplashScreen
   m_TagString: Untagged
@@ -870,32 +870,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6733817669625457078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8370466590664615655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7583c2b4b1121fc4d91fda62dacefc2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeInDuration: 3
-  dialogueLines:
-  - "Ugh... time for work already. Night shifts at the caf\xE9 always bring in the
-    weirdos."
-  - Rent's due soon. Just one more shift until payday.
-  - "Wait\u2014was that window open before? Huh."
-  - Let me make sure I've changed, turned off the TV, and closed that window before
-    heading out.
-  - "Everyday is the same. Feels like d\xE9j\xE0 vu, like I'm stuck waiting for one
-    last order..."
-  textSpeed: 0.03
-  delayAfterLine: 0.5
-  continuePromptText: Press Space or Enter to Continue...
-  typewriterSoundSource: {fileID: 4536056031300915037}
 --- !u!82 &4536056031300915037
 AudioSource:
   m_ObjectHideFlags: 0
@@ -993,6 +967,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2467074419428652893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8370466590664615655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea67149508ea03b408db11c9dbd830e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5700845940581227333
 PrefabInstance:
   m_ObjectHideFlags: 0
