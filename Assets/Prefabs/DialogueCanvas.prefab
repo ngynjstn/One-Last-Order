@@ -166,7 +166,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3900108755062758285, guid: 99bf5ae0fa4783d45906c4a2544267ed, type: 3}
       propertyPath: m_Name
-      value: ConversationManager Custom
+      value: RicedOutConversationManager
       objectReference: {fileID: 0}
     - target: {fileID: 3900108755196472087, guid: 99bf5ae0fa4783d45906c4a2544267ed, type: 3}
       propertyPath: m_Pivot.x
