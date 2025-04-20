@@ -43,7 +43,13 @@ public class DresserInteractable : MonoBehaviour, IInteractable
     // Implementing the Interact method from IInteractable interface
     public void Interact()
     {
-       ConversationManager.Instance.StartConversation(dialogueObject);
+        //if (!hasChangedClothes)
+        //{
+        //    hasChangedClothes = true;
+        //    StartCoroutine(ChangeClothesSequence());
+        //}
+        // Start the conversation with the NPC
+        ConversationManager.Instance.StartConversation(dialogueObject);
     }
     public void ChangeIntoClothes()
     {
