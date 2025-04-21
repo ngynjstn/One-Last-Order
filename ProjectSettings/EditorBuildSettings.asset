@@ -21,5 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Apartment (ACT IV).unity
     guid: 07abc716fd20dce4c8de96506fadf2ae
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 677cfe7775c1d0a49a24e61d4e022ef4, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
