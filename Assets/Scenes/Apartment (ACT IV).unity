@@ -11340,7 +11340,7 @@ Camera:
   m_GameObject: {fileID: 1978465881}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -13023,6 +13023,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1711195513}
     - target: {fileID: 1799339343877208355, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: m_CameraType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799339343877208355, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
@@ -13073,6 +13077,14 @@ PrefabInstance:
     - target: {fileID: 6431980907140887885, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468091101805924879, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468091101805924879, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: m_ClearFlags
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
