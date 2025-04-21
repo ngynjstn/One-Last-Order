@@ -54,9 +54,10 @@ public class BedInteractable : MonoBehaviour, IInteractable
     private UnityEngine.Rendering.Universal.Vignette vignette;
     private float targetVignetteIntensity;
     private float originalFOV;
-
+    private MeshRenderer m_meshRenderer;
     private void Start()
     {
+        m_meshRenderer = playerObject.GetComponent<MeshRenderer>();
         // Ensure everything is properly set up at start
         if (fadeCanvasGroup != null)
         {
@@ -118,7 +119,8 @@ public class BedInteractable : MonoBehaviour, IInteractable
         // 2. Hide player character
         if (playerObject != null)
         {
-            playerObject.SetActive(false);
+            //playerObject.SetActive(false);
+            m_meshRenderer.enabled = false; // Disable the mesh renderer to hide the player
         }
 
         // 3. Activate the antagonist during the black screen
