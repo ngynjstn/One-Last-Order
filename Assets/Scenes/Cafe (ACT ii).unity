@@ -2198,33 +2198,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6958251992325196571, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
---- !u!1 &242860299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 65702495048144492, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
-  m_PrefabInstance: {fileID: 638113491}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &242860301
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242860299}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &244908172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6555036529033490241, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
@@ -4913,7 +4886,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 0c3500d68f5a7544e883d17d5f7fde8e, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2298369970898526988, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
@@ -5030,9 +5004,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6049025997658910312, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1650230639}
-    - targetCorrespondingSourceObject: {fileID: 65702495048144492, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 242860301}
     - targetCorrespondingSourceObject: {fileID: -5153778607256461594, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1319875189}
@@ -14168,6 +14139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a2570dcf127404cbf062d9c6e3f597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerPrefabs: []
+  spawnPoint: {fileID: 0}
+  counterPoint: {fileID: 0}
+  initialDelay: 2
+  timeBetweenCustomers: 3
+  dialogueObject: {fileID: 0}
 --- !u!4 &1440030585
 Transform:
   m_ObjectHideFlags: 0
