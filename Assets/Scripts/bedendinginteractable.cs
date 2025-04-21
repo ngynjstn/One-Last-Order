@@ -17,26 +17,27 @@ public class BedInteractable : MonoBehaviour, IInteractable
 
     [Header("UI References")]
     [SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private GameObject demoCanvasPanel; // New DEMO canvas panel
 
     [Header("Jumpscare Settings")]
-    [SerializeField] private GameObject jumpscareObject; // The antagonist
-    [SerializeField] private Camera mainCamera; // Regular gameplay camera
-    [SerializeField] private Camera bedCamera; // Camera positioned on the bed
-    [SerializeField] private AudioSource scareSound; // Jumpscare sound
-    [SerializeField] private float blackScreenDuration = 2f; // How long to stay black
-    [SerializeField] private float lookSideDuration = 2f; // How long to look to the side
-    [SerializeField] private float lookUpDuration = 1.5f; // How long to look up at antagonist
-    [SerializeField] private float jumpscareStareDuration = 5f; // How long to stare at antagonist
+    [SerializeField] private GameObject jumpscareObject;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera bedCamera;
+    [SerializeField] private AudioSource scareSound;
+    [SerializeField] private float blackScreenDuration = 2f;
+    [SerializeField] private float lookSideDuration = 2f;
+    [SerializeField] private float lookUpDuration = 1.5f;
+    [SerializeField] private float jumpscareStareDuration = 5f;
 
     [Header("Camera Look Positions")]
-    [SerializeField] private Vector3 lookSideRotation = new Vector3(0, 30, 0); // Left side look (positive Y value)
-    [SerializeField] private Vector3 lookUpRotation = new Vector3(30, 40, 0); // Look up and left
+    [SerializeField] private Vector3 lookSideRotation = new Vector3(0, 30, 0);
+    [SerializeField] private Vector3 lookUpRotation = new Vector3(30, 40, 0);
 
     [Header("Player References")]
-    [SerializeField] private GameObject playerObject; // Reference to player GameObject
+    [SerializeField] private GameObject playerObject;
 
     [Header("Blinking Vignette")]
-    [SerializeField] public Volume globalVolume; // Assign your Global Volume here
+    [SerializeField] public Volume globalVolume;
     [SerializeField] private float blinkSpeed = 0.5f;
     [SerializeField] private float minVignetteIntensity = 0.3f;
     [SerializeField] private float maxVignetteIntensity = 0.7f;
@@ -47,30 +48,29 @@ public class BedInteractable : MonoBehaviour, IInteractable
 
     [Header("Camera Zoom")]
     [SerializeField] private float zoomDuration = 2f;
-    [SerializeField] private float zoomFOV = 30f; // The target field of view for zoom
+    [SerializeField] private float zoomFOV = 30f;
 
     private bool isSleeping = false;
     private Quaternion initialRotation;
     private UnityEngine.Rendering.Universal.Vignette vignette;
     private float targetVignetteIntensity;
     private float originalFOV;
+    private Coroutine blinkCoroutine;
+    private Coroutine shakeCoroutine;
 
     private void Start()
     {
-        // Ensure everything is properly set up at start
         if (fadeCanvasGroup != null)
         {
             fadeCanvasGroup.alpha = 0f;
             fadeCanvasGroup.blocksRaycasts = false;
         }
 
-        // Make sure jumpscare objects are inactive
         if (jumpscareObject != null)
         {
             jumpscareObject.SetActive(false);
         }
 
-        // Make sure the bed camera is disabled at start
         if (bedCamera != null)
         {
             initialRotation = bedCamera.transform.rotation;
@@ -78,21 +78,25 @@ public class BedInteractable : MonoBehaviour, IInteractable
             bedCamera.gameObject.SetActive(false);
         }
 
-        // Get the Vignette component from the Global Volume
         if (globalVolume != null && globalVolume.profile.TryGet(out vignette))
         {
-            targetVignetteIntensity = maxVignetteIntensity; // Initialize target
-            StartCoroutine(BlinkVignette());
+            targetVignetteIntensity = maxVignetteIntensity;
+            blinkCoroutine = StartCoroutine(BlinkVignette());
         }
         else
         {
             Debug.LogError("Global Volume or Vignette override not found!");
         }
+
+        // Ensure demo panel is hidden at start
+        if (demoCanvasPanel != null)
+        {
+            demoCanvasPanel.SetActive(false);
+        }
     }
 
     public void Interact()
     {
-        // Check if another interactable is using the fade
         if (WindowInteractable.isFadeInUse)
         {
             Debug.Log("Cannot interact with bed - fade already in use");
@@ -102,8 +106,8 @@ public class BedInteractable : MonoBehaviour, IInteractable
         if (!isSleeping)
         {
             isSleeping = true;
-            m_interactableHintText = ""; // Hide prompt
-            WindowInteractable.isFadeInUse = true; // Claim the fade
+            m_interactableHintText = "";
+            WindowInteractable.isFadeInUse = true;
             StartCoroutine(SleepAndJumpscareSequence());
         }
     }
@@ -121,49 +125,37 @@ public class BedInteractable : MonoBehaviour, IInteractable
             playerObject.SetActive(false);
         }
 
-        // 3. Activate the antagonist during the black screen
+        // 3. Activate antagonist
         if (jumpscareObject != null)
             jumpscareObject.SetActive(true);
 
-        // 4. Play the scare sound earlier during black screen
+        // 4. Play scare sound
         if (scareSound != null)
             scareSound.Play();
 
         // 5. Wait in darkness
         yield return new WaitForSeconds(blackScreenDuration);
 
-        // 6. Switch cameras and reset bed camera position
+        // 6. Switch cameras
         if (bedCamera != null)
         {
             bedCamera.transform.rotation = initialRotation;
             bedCamera.gameObject.SetActive(true);
-            Debug.Log("Bed camera activated.");
-
-            // Start camera shake when bed camera is active
-            StartCoroutine(CameraShake(bedCamera.transform));
-        }
-        else
-        {
-            Debug.LogError("Bed Camera is not assigned!");
+            shakeCoroutine = StartCoroutine(CameraShake(bedCamera.transform));
         }
 
         if (mainCamera != null)
         {
             mainCamera.gameObject.SetActive(false);
-            Debug.Log("Main camera disabled.");
-        }
-        else
-        {
-            Debug.LogError("Main Camera is not assigned!");
         }
 
-        // 7. Fade back in to show the player in bed
+        // 7. Fade back in
         yield return StartCoroutine(FadeTo(0f));
 
-        // 8. Short pause to establish the scene
+        // 8. Short pause
         yield return new WaitForSeconds(1f);
 
-        // 9. Slowly look to the side (window)
+        // 9. Look to the side
         if (bedCamera != null)
         {
             yield return StartCoroutine(RotateCamera(
@@ -172,10 +164,10 @@ public class BedInteractable : MonoBehaviour, IInteractable
                 lookSideDuration));
         }
 
-        // 10. Pause briefly to build tension
+        // 10. Pause
         yield return new WaitForSeconds(0.8f);
 
-        // 11. Now look up toward where the antagonist will be
+        // 11. Look up
         if (bedCamera != null)
         {
             yield return StartCoroutine(RotateCamera(
@@ -184,20 +176,61 @@ public class BedInteractable : MonoBehaviour, IInteractable
                 lookUpDuration));
         }
 
-        // 12. Add camera zoom effect
+        // 12. Zoom in
         if (bedCamera != null)
         {
             yield return StartCoroutine(ZoomCamera(bedCamera, zoomFOV, zoomDuration));
         }
 
-        // 13. Wait longer while staring at the antagonist (increased duration)
+        // 13. Stop all effects and show DEMO panel
+        StopAllEffects();
+        ShowDemoPanel();
+
+        // 14. Wait with DEMO panel shown
         yield return new WaitForSeconds(jumpscareStareDuration);
 
-        // 14. Fade to black for game end
-        yield return StartCoroutine(FadeTo(1f));
-
-        // 15. End game or load credits
         Debug.Log("Game ending sequence complete");
+    }
+
+    private void StopAllEffects()
+    {
+        // Stop vignette blinking
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
+
+        // Stop camera shake
+        if (shakeCoroutine != null)
+        {
+            StopCoroutine(shakeCoroutine);
+            shakeCoroutine = null;
+        }
+
+        // Reset camera position if shaking was interrupted
+        if (bedCamera != null)
+        {
+            bedCamera.transform.localPosition = Vector3.zero;
+        }
+
+        // Reset vignette intensity
+        if (vignette != null)
+        {
+            vignette.intensity.value = minVignetteIntensity;
+        }
+    }
+
+    private void ShowDemoPanel()
+    {
+        if (demoCanvasPanel != null)
+        {
+            demoCanvasPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Demo Canvas Panel is not assigned!");
+        }
     }
 
     private IEnumerator RotateCamera(Transform cameraTransform, Quaternion targetRotation, float duration)
@@ -258,7 +291,7 @@ public class BedInteractable : MonoBehaviour, IInteractable
             else
             {
                 Debug.LogError("Vignette override is null in BlinkVignette!");
-                yield break; // Stop the coroutine if vignette is not found
+                yield break;
             }
         }
     }
@@ -279,7 +312,7 @@ public class BedInteractable : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        cameraTransform.localPosition = originalPosition; // Reset to original position
+        cameraTransform.localPosition = originalPosition;
     }
 
     private IEnumerator ZoomCamera(Camera camera, float targetFOV, float duration)
