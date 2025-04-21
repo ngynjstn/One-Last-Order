@@ -42,7 +42,16 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-       ConversationManager.Instance.StartConversation(dialogueObject);
+        // Prevent interaction if already interacting or fade is in use
+        if (isInteracting || isFadeInUse)
+        {
+            Debug.Log("Cannot interact with window - fade already in use");
+            return;
+        }
+
+        StartCoroutine(ToggleWindowSequence());
+
+        //ConversationManager.Instance.StartConversation(dialogueObject);
     }
     public void ActivateWindow()
     {
