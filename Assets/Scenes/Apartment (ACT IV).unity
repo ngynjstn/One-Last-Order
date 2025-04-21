@@ -12342,6 +12342,14 @@ MonoBehaviour:
   lookSideRotation: {x: -5, y: 215, z: 0}
   lookUpRotation: {x: -25, y: 225, z: 0}
   playerObject: {fileID: 124702348}
+  globalVolume: {fileID: 1978465886}
+  blinkSpeed: 3
+  minVignetteIntensity: 0.3
+  maxVignetteIntensity: 1
+  shakeMagnitude: 0.05
+  shakeDuration: 20
+  zoomDuration: 15
+  zoomFOV: 30
 --- !u!1 &2081383537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4912944116115194915, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
@@ -13002,6 +13010,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 495768404706730058, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: Priority
+      value: 137
+      objectReference: {fileID: 0}
+    - target: {fileID: 495768404706730058, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 569433461610022925, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
       propertyPath: m_uiHintTextElement
       value: 

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5925963446599512779}
   - component: {fileID: 495768404706730058}
-  - component: {fileID: 5316741698578289193}
   m_Layer: 0
   m_Name: FootSteps
   m_TagString: Untagged
@@ -130,19 +129,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5316741698578289193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173676853492167316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45e029476ead004bba5e47d164f94b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  footstep: {fileID: 1173676853492167316}
 --- !u!1 &2428940440858974989
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +144,7 @@ GameObject:
   - component: {fileID: 3545644181252025847}
   - component: {fileID: 569433461610022925}
   - component: {fileID: 443298160012692760}
+  - component: {fileID: 613810578660935468}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -424,6 +411,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &613810578660935468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428940440858974989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45e029476ead004bba5e47d164f94b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstep: {fileID: 1173676853492167316}
 --- !u!1 &3304175235584249418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea67149508ea03b408db11c9dbd830e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeInDuration: 1
 --- !u!1001 &5700845940581227333
 PrefabInstance:
   m_ObjectHideFlags: 0
