@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ImageGradientToggle : MonoBehaviour
 {
     private Image gradientImg;
+    
     [Range(0.1f, 0.5f)]
     public float m_BlinkTransitionTime = 0.2f; //Time for fading in and out (each one the same amount)
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +23,7 @@ public class ImageGradientToggle : MonoBehaviour
     void Start()
     {
         gradientImg = GetComponent<Image>();
+        
         gradientImg.enabled = false;
     }
 
