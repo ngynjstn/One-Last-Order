@@ -24,7 +24,8 @@ public class CupInteractable : MonoBehaviour, IInteractable
         {
             curr = SpawnCup();
             Debug.Log(curr);
-            m_interactable = false; // Optional: prevent multiple spawns
+            m_interactable = false;
+            // TODO: change m_interactable to true when coffee is given
         }
     }
     private GameObject SpawnCup()
@@ -33,12 +34,10 @@ public class CupInteractable : MonoBehaviour, IInteractable
         currentCup.transform.SetParent(handTransform);
         currentCup.transform.localPosition = Vector3.zero;
         currentCup.transform.localRotation = Quaternion.identity;
+        PickupCup pickupScript = currentCup.GetComponent<PickupCup>();
+        pickupScript.SetHand(handTransform);
 
-        // Optional cleanup
-        Collider col = currentCup.GetComponent<Collider>();
-        if (col) col.enabled = false;
-
-        Rigidbody rb = currentCup.GetComponent<Rigidbody>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
         {
             rb.isKinematic = true;

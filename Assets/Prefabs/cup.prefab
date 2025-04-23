@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 129079518811811738}
   - component: {fileID: 5123855094641373120}
   - component: {fileID: 8726380667025823485}
-  - component: {fileID: -4577949919501697561}
+  - component: {fileID: -4618781537472398765}
+  - component: {fileID: 5270470836143408180}
   m_Layer: 0
   m_Name: cup
   m_TagString: Untagged
@@ -87,7 +88,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-4577949919501697561
+--- !u!64 &-4618781537472398765
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410970914048076864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4021664102554863265, guid: 947a39183ff049c4dad29d83d56dbcb7, type: 3}
+--- !u!114 &5270470836143408180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,12 +119,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1410970914048076864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c1c49558860aa4fbfe74c1e7842733, type: 3}
+  m_Script: {fileID: 11500000, guid: e25ad0fa0f3a1b6448b5305036f85b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactableHintText: Press E to interact
+  m_interactableHintText: Press E to pick up cup
   m_interactable: 1
-  cup: {fileID: 0}
   handTransform: {fileID: 0}
-  currentCup: {fileID: 0}
-  playerCameraTransform: {fileID: 0}

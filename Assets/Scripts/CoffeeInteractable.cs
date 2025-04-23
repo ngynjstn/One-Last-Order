@@ -15,7 +15,6 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject cup;
     
     public bool isPlaced = false;
-    public bool anyRoom = true;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -29,8 +28,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 
             Debug.Log("Cup placed: " + access.name);
             StartPouring();
-            anyRoom = false;
-            m_interactable = anyRoom;
+            m_interactable = false;
         }
         else
         {
@@ -52,11 +50,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         cup.transform.localPosition = Vector3.zero;
         cup.transform.localRotation = Quaternion.identity;
 
-        // Disable physics
-        Collider col = cup.GetComponent<Collider>();
-        if (col) col.enabled = false;
-
-        Rigidbody rb = cup.GetComponent<Rigidbody>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
         {
             rb.isKinematic = true;
