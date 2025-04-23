@@ -5670,6 +5670,7 @@ MonoBehaviour:
   m_interactable: 1
   nextSceneName: Cafe (ACT ii)
   fadeDuration: 1
+  fadeAnimator: {fileID: 0}
   fadeCanvasGroup: {fileID: 520262061}
 --- !u!1 &1120425548 stripped
 GameObject:
@@ -6928,6 +6929,7 @@ MonoBehaviour:
   m_interactable: 1
   nextSceneName: Cafe (ACT ii)
   fadeDuration: 1
+  fadeAnimator: {fileID: 476276381}
   fadeCanvasGroup: {fileID: 2078770339}
 --- !u!1 &1332846387 stripped
 GameObject:

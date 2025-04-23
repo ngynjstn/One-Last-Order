@@ -15,6 +15,7 @@ public class ActII_StoryManager : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private float initialDelay = 2f;
     [SerializeField] private float timeBetweenCustomers = 3f;
+    [SerializeField] private Animator fadeAnimator;
 
     private int currentCustomerIndex = 0;
     private bool customerInProgress = false;
@@ -23,6 +24,7 @@ public class ActII_StoryManager : MonoBehaviour
     public NPCConversation dialogueObject;
     private void Start()
     {
+        fadeAnimator.SetTrigger("Fade_In");
         WaitForSeconds wait = new WaitForSeconds(5f);
         ConversationManager.Instance.StartConversation(dialogueObject);
         StartCoroutine(StartStorySequence());
