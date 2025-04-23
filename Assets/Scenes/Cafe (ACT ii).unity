@@ -1228,6 +1228,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4768362842119814386, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
+--- !u!1 &113665089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 113665090}
+  m_Layer: 0
+  m_Name: cup_placement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &113665090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113665089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.434, y: -0.238, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 846184152}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &116165485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7698486751090307849, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
@@ -15817,6 +15848,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1418018501420096746, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1954764560}
+    - targetCorrespondingSourceObject: {fileID: -1418018501420096746, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 113665090}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8446117990760304899, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       insertIndex: 2
@@ -16156,6 +16190,7 @@ MonoBehaviour:
   counterPoint: {fileID: 0}
   initialDelay: 2
   timeBetweenCustomers: 3
+  fadeAnimator: {fileID: 0}
   dialogueObject: {fileID: 0}
 --- !u!4 &1440030585
 Transform:
@@ -19737,9 +19772,6 @@ MonoBehaviour:
   cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
   handTransform: {fileID: 342729727}
   playerCameraTransform: {fileID: 225870965}
-  pickUpLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!1 &1731676212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2377716879361554009, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
@@ -21301,7 +21333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to dispense coffee
   m_interactable: 1
-  placeHolder: {fileID: 846184152}
+  placeHolder: {fileID: 113665090}
   cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
   CoffeeStream: {fileID: 1954764562}
 --- !u!1 &1890775417 stripped
