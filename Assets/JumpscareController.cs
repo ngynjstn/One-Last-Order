@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DialogueEditor;
 
 public class JumpscareController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class JumpscareController : MonoBehaviour
     public AudioSource jumpsource;
     public GameObject homelessManPrefab; // Assign the homeless man prefab in the Inspector
     public Transform spawnPoint;       // Assign the spawn point transform in the Inspector
-
+    public NPCConversation dialogueObject; // Assign the dialogue object in the Inspector
     private bool hasTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -51,7 +52,8 @@ public class JumpscareController : MonoBehaviour
         {
             obj.SetActive(false);
         }
-
+        // Begin the homeless man's fuck ass dialogue
+        ConversationManager.Instance.StartConversation(dialogueObject);
         // Optionally disable this trigger
         // gameObject.SetActive(false);
     }

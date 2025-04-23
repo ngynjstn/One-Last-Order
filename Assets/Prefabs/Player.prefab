@@ -554,6 +554,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 485e9481-852b-406f-95cf-abd935a1962c
+    m_ActionName: 'Player/PickUp[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26494a9a-a308-4cef-a187-e03abf0fc3cf
+    m_ActionName: 'Player/Throw[/Keyboard/t]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c01e9c5-cfe3-45e3-a12b-1854b66ebfca
+    m_ActionName: 'Player/Drop[/Keyboard/g]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -792,10 +804,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6431980907140887885}
     m_Modifications:
-    - target: {fileID: 160090893038294464, guid: fa0927c6232e3bf4592562158d6d45da, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2698996446180896366, guid: fa0927c6232e3bf4592562158d6d45da, type: 3}
       propertyPath: m_Pivot.x
       value: 0
