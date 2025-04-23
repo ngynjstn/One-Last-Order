@@ -17,8 +17,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
     [SerializeField] private bool isWindowOpen = true;
 
     [Header("Fade Settings")]
-    [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private CanvasGroup fadeCanvasGroup;
+    //[SerializeField] private float fadeDuration = 1f;
+    //[SerializeField] private CanvasGroup fadeCanvasGroup;
+    [SerializeField] private Animator fadeAnimator;
+
 
 
     [Header("Dialogue")]
@@ -30,11 +32,11 @@ public class WindowInteractable : MonoBehaviour, IInteractable
     private void Start()
     {
         // Ensure fade canvas is hidden at the start
-        if (fadeCanvasGroup != null)
-        {
-            fadeCanvasGroup.alpha = 0f;
-            fadeCanvasGroup.blocksRaycasts = false;
-        }
+        //if (fadeCanvasGroup != null)
+        //{
+        //    fadeCanvasGroup.alpha = 0f;
+        //    fadeCanvasGroup.blocksRaycasts = false;
+        //}
 
         // Set initial window state
         UpdateWindowAppearance();
@@ -76,7 +78,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
         Debug.Log("Toggling window state...");
 
         // Fade to black
-        yield return StartCoroutine(FadeTo(1f));
+        //yield return StartCoroutine(FadeTo(1f));
+        fadeAnimator.SetTrigger("Fade_Out");
+        // Short pause while black
+        yield return new WaitForSeconds(2f);
 
         // Toggle window state
         isWindowOpen = !isWindowOpen;
@@ -92,11 +97,9 @@ public class WindowInteractable : MonoBehaviour, IInteractable
             m_interactableHintText = "Press E to open window";
         }
 
-        // Short pause while black
-        yield return new WaitForSeconds(0.3f);
-
         // Fade back in
-        yield return StartCoroutine(FadeTo(0f));
+        //yield return StartCoroutine(FadeTo(0f));
+        fadeAnimator.SetTrigger("Fade_In");
 
         // Release the interaction locks
         isInteracting = false;
@@ -136,39 +139,39 @@ public class WindowInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    private IEnumerator FadeTo(float targetAlpha)
-    {
-        if (fadeCanvasGroup == null)
-        {
-            Debug.LogError("Fade canvas group not assigned!");
-            yield break;
-        }
+    //private IEnumerator FadeTo(float targetAlpha)
+    //{
+    //    //if (fadeCanvasGroup == null)
+    //    //{
+    //    //    Debug.LogError("Fade canvas group not assigned!");
+    //    //    yield break;
+    //    //}
 
-        // Make sure target alpha is properly clamped
-        targetAlpha = Mathf.Clamp01(targetAlpha);
-        float startAlpha = fadeCanvasGroup.alpha;
-        float elapsedTime = 0;
+    //    // Make sure target alpha is properly clamped
+    //    targetAlpha = Mathf.Clamp01(targetAlpha);
+    //    float startAlpha = fadeCanvasGroup.alpha;
+    //    float elapsedTime = 0;
 
-        // Enable the canvas group gameObject if it was disabled
-        fadeCanvasGroup.gameObject.SetActive(true);
+    //    // Enable the canvas group gameObject if it was disabled
+    //    fadeCanvasGroup.gameObject.SetActive(true);
 
-        while (elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeDuration);
-            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, normalizedTime);
-            fadeCanvasGroup.blocksRaycasts = fadeCanvasGroup.alpha > 0.5f;
-            yield return null;
-        }
+    //    while (elapsedTime < fadeDuration)
+    //    {
+    //        elapsedTime += Time.deltaTime;
+    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeDuration);
+    //        fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, normalizedTime);
+    //        fadeCanvasGroup.blocksRaycasts = fadeCanvasGroup.alpha > 0.5f;
+    //        yield return null;
+    //    }
 
-        // Ensure we reach exact target value
-        fadeCanvasGroup.alpha = targetAlpha;
-        fadeCanvasGroup.blocksRaycasts = targetAlpha > 0.5f;
+    //    // Ensure we reach exact target value
+    //    fadeCanvasGroup.alpha = targetAlpha;
+    //    fadeCanvasGroup.blocksRaycasts = targetAlpha > 0.5f;
 
-        // If we're completely transparent, we can disable the gameObject to save resources
-        if (targetAlpha <= 0)
-        {
-            fadeCanvasGroup.gameObject.SetActive(false);
-        }
-    }
+    //    // If we're completely transparent, we can disable the gameObject to save resources
+    //    if (targetAlpha <= 0)
+    //    {
+    //        fadeCanvasGroup.gameObject.SetActive(false);
+    //    }
+    //}
 }

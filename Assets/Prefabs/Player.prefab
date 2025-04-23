@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c765f2dc851e36469404eebf1528296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeInDuration: 1
   fadeAnimator: {fileID: 5171739000157543170}
 --- !u!95 &5171739000157543170
 Animator:
@@ -910,10 +909,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6431980907140887885}
     m_Modifications:
-    - target: {fileID: 400280345681252801, guid: 400ed8116a9feab4aad00e0feb6c436b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3008674613721505300, guid: 400ed8116a9feab4aad00e0feb6c436b, type: 3}
       propertyPath: m_Name
       value: DialogueCanvas

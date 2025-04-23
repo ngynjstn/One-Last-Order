@@ -66,29 +66,30 @@ public class SplashScreenController : MonoBehaviour
         continueText.gameObject.SetActive(false);
 
         // Start the fade-in
-        Color startColor = splashImage.color;
-        startColor.a = 1f;
-        splashImage.color = startColor;
+        //Color startColor = splashImage.color;
+        //startColor.a = 1f;
+        //splashImage.color = startColor;
         StartCoroutine(FadeIn());
     }
 
     IEnumerator FadeIn()
     {
-        float counter = 0f;
-        Color currentColor = splashImage.color;
+        //float counter = 0f;
+        //Color currentColor = splashImage.color;
 
-        while (counter < fadeInDuration)
-        {
-            counter += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, counter / fadeInDuration);
-            currentColor.a = alpha;
-            splashImage.color = currentColor;
-            yield return null;
-        }
+        //while (counter < fadeInDuration)
+        //{
+        //    counter += Time.deltaTime;
+        //    float alpha = Mathf.Lerp(1f, 0f, counter / fadeInDuration);
+        //    currentColor.a = alpha;
+        //    splashImage.color = currentColor;
+        //    yield return null;
+        //}
 
-        // Fade-in complete, start the dialogue
+        //// Fade-in complete, start the dialogue
         dialogueActive = true;
         StartDialogue();
+        yield return null;
     }
 
     void Update()
@@ -158,26 +159,27 @@ public class SplashScreenController : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        float counter = 0f;
-        Color panelColor = splashImage.color;
-        Color textColor = dialogueText.color;
-        Color continueTextColor = continueText.color;
-        float fadeDuration = fadeInDuration;
+        //float counter = 0f;
+        //Color panelColor = splashImage.color;
+        //Color textColor = dialogueText.color;
+        //Color continueTextColor = continueText.color;
+        //float fadeDuration = fadeInDuration;
 
-        while (counter < fadeDuration)
-        {
-            counter += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, counter / fadeDuration);
-            panelColor.a = alpha;
-            splashImage.color = panelColor;
-            textColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
-            dialogueText.color = textColor;
-            continueTextColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
-            continueText.color = continueTextColor;
-            yield return null;
-        }
+        //while (counter < fadeDuration)
+        //{
+        //    counter += Time.deltaTime;
+        //    float alpha = Mathf.Lerp(0f, 1f, counter / fadeDuration);
+        //    panelColor.a = alpha;
+        //    splashImage.color = panelColor;
+        //    textColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
+        //    dialogueText.color = textColor;
+        //    continueTextColor.a = Mathf.Lerp(1f, 0f, counter / fadeDuration);
+        //    continueText.color = continueTextColor;
+        //    yield return null;
+        //}
 
-        // Fade out complete
+        //// Fade out complete
         gameObject.SetActive(false);
+        yield return null;
     }
 }
