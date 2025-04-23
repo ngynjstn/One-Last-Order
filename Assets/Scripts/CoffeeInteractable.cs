@@ -13,7 +13,6 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
-    
     public bool isPlaced = false;
     public void Interact()
     {
@@ -70,8 +69,11 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     }
     public ParticleSystem CoffeeStream;
     public float hSliderValue = 0.0F;
-    public void StartPouring()
+    public void StartPouring() 
     {
+        AudioSource coffeeSound = GetComponent<AudioSource>();
+        coffeeSound.time = 2.2f;
+        coffeeSound.Play();
         var main = CoffeeStream.main;
         main.startDelay = hSliderValue;
         CoffeeStream.Play(true);
