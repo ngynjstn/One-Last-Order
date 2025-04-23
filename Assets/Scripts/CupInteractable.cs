@@ -12,11 +12,8 @@ public class CupInteractable : MonoBehaviour, IInteractable
     public bool IsInteractable => m_interactable;
     [SerializeField] private GameObject cup;
     [SerializeField] private Transform handTransform;
-
     private GameObject currentCup;
-
     [SerializeField] private Transform playerCameraTransform;
-    [SerializeField] private LayerMask pickUpLayerMask;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);

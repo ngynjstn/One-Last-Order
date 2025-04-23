@@ -21301,8 +21301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interactableHintText: Press E to dispense coffee
   m_interactable: 1
-  placeHolder: {fileID: 0}
-  cup: {fileID: 0}
+  placeHolder: {fileID: 846184152}
+  cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
   CoffeeStream: {fileID: 1954764562}
 --- !u!1 &1890775417 stripped
 GameObject:

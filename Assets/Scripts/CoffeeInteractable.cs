@@ -6,6 +6,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 {
     GameObject machine1;
     
+
     
     // public AudioSource coffeeSound;
 
@@ -19,21 +20,15 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
 
-    private GameObject currentCup;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-        if (placeHolder == null) return;
-
-        if (currentCup == null && cup != null)
-        {
-            // Spawn new cup and place it
-            currentCup = Instantiate(cup);
-        }
-        PlaceCup(currentCup);
+        PlaceCup(cup);
+        StartPouring();
     }
     private void PlaceCup(GameObject cup)
     {
+        cup = Instantiate(cup, placeHolder.position, placeHolder.rotation);
         cup.transform.SetParent(placeHolder);
         cup.transform.localPosition = Vector3.zero;
         cup.transform.localRotation = Quaternion.identity;
@@ -63,6 +58,6 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     public ParticleSystem CoffeeStream;
     public void StartPouring()
     {
-        CoffeeStream.Play();
+        CoffeeStream.Play(true);
     }
 }
