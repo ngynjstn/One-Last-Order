@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 129079518811811738}
   - component: {fileID: 5123855094641373120}
   - component: {fileID: 8726380667025823485}
+  - component: {fileID: -4577949919501697561}
   m_Layer: 0
   m_Name: cup
   m_TagString: Untagged
@@ -86,3 +87,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4577949919501697561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410970914048076864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c1c49558860aa4fbfe74c1e7842733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_interactableHintText: Press E to interact
+  m_interactable: 1
+  cup: {fileID: 0}
+  handTransform: {fileID: 0}
+  currentCup: {fileID: 0}
+  playerCameraTransform: {fileID: 0}

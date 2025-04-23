@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class CoffeeInteractable : MonoBehaviour, IInteractable
 {
-    GameObject machine1;
-    
-
-    
-    // public AudioSource coffeeSound;
-
     // The prompt text that appears when you're looking at an interactable.
     [SerializeField] private string m_interactableHintText = "Press E to interact";
     public string InteractableHintText => m_interactableHintText;
@@ -19,21 +13,46 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
-
+    
+    public bool isPlaced = false;
+    public bool anyRoom = true;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-        PlaceCup(cup);
+
+        GameObject access = CupInteractable.curr;
+
+        if (access != null && !isPlaced)
+        {
+            PlaceCup(access);
+            isPlaced = true;
+
+            Debug.Log("Cup placed: " + access.name);
+            StartPouring();
+            anyRoom = false;
+            m_interactable = anyRoom;
+        }
+        else
+        {
+            Debug.LogWarning("No cup to place or cup already placed.");
+        }
+
+        // Destroy(CupInteractable.curr);
+
         StartPouring();
     }
     private void PlaceCup(GameObject cup)
     {
-        cup = Instantiate(cup, placeHolder.position, placeHolder.rotation);
+        // Move the existing cup to the machine placeholder
         cup.transform.SetParent(placeHolder);
+        cup.transform.position = placeHolder.position;
+        cup.transform.rotation = placeHolder.rotation;
+
+        // Align properly
         cup.transform.localPosition = Vector3.zero;
         cup.transform.localRotation = Quaternion.identity;
 
-        // Optional cleanup
+        // Disable physics
         Collider col = cup.GetComponent<Collider>();
         if (col) col.enabled = false;
 
@@ -53,11 +72,14 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public ParticleSystem CoffeeStream;
+    public float hSliderValue = 0.0F;
     public void StartPouring()
     {
+        var main = CoffeeStream.main;
+        main.startDelay = hSliderValue;
         CoffeeStream.Play(true);
     }
 }

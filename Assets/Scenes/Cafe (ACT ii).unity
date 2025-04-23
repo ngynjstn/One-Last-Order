@@ -15715,43 +15715,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.8353386
+      value: 3.827362
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04518366
+      value: 0.039668083
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.0080976
+      value: 7.01067
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999979
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.000015456957
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.0008572175
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.001885842
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.098
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.216
       objectReference: {fileID: 0}
     - target: {fileID: -5691729451416250239, guid: e47c0d18337992146b2cf9ef7732b9f6, type: 3}
       propertyPath: m_LocalScale.x
@@ -19771,6 +19771,7 @@ MonoBehaviour:
   m_interactable: 1
   cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
   handTransform: {fileID: 342729727}
+  currentCup: {fileID: 0}
   playerCameraTransform: {fileID: 225870965}
 --- !u!1 &1731676212 stripped
 GameObject:
@@ -21335,7 +21336,10 @@ MonoBehaviour:
   m_interactable: 1
   placeHolder: {fileID: 113665090}
   cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
+  isPlaced: 0
+  anyRoom: 1
   CoffeeStream: {fileID: 1954764562}
+  hSliderValue: 1
 --- !u!1 &1890775417 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7064062707273378452, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
