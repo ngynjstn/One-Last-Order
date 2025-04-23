@@ -1141,8 +1141,7 @@ MonoBehaviour:
   openWindowGlassMaterial: {fileID: 2100000, guid: 749b0f1c7a4d20040915ea36d613065e, type: 2}
   closedWindowGlassMaterial: {fileID: 4511480942784389346, guid: a890fb6cdc6fe7b47a4bebb0a20df8a0, type: 3}
   isWindowOpen: 1
-  fadeDuration: 1
-  fadeCanvasGroup: {fileID: 520262061}
+  fadeAnimator: {fileID: 3691540748312352669}
   dialogueObject: {fileID: 1713314997}
 --- !u!1 &159920528 stripped
 GameObject:
@@ -12570,6 +12569,7 @@ MonoBehaviour:
   m_interactableHintText: Press E to Sleep
   m_interactable: 1
   fadeDuration: 1.5
+  fadeAnimator: {fileID: 3691540748312352669}
   fadeCanvasGroup: {fileID: 1710804077}
   demoCanvasPanel: {fileID: 2037286357}
   jumpscareObject: {fileID: 530063817}
@@ -13441,6 +13441,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1718214710}
   m_SourcePrefab: {fileID: 100100000, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+--- !u!95 &3691540748312352669 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5171739000157543170, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+  m_PrefabInstance: {fileID: 3691540748312352668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5825298613746384472
 PrefabInstance:
   m_ObjectHideFlags: 0

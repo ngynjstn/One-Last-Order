@@ -14,6 +14,7 @@ public class BedInteractable : MonoBehaviour, IInteractable
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1.5f;
+    [SerializeField] private Animator fadeAnimator;
 
     [Header("UI References")]
     [SerializeField] private CanvasGroup fadeCanvasGroup;
@@ -118,7 +119,9 @@ public class BedInteractable : MonoBehaviour, IInteractable
         Debug.Log("Going to sleep...");
 
         // 1. Fade to black
-        yield return StartCoroutine(FadeTo(1f));
+        //yield return StartCoroutine(FadeTo(1f));
+        fadeAnimator.SetTrigger("Fade_Out");
+        yield return new WaitForSeconds(1f);
 
         // 2. Hide player character
         if (playerObject != null)
@@ -152,10 +155,12 @@ public class BedInteractable : MonoBehaviour, IInteractable
         }
 
         // 7. Fade back in
-        yield return StartCoroutine(FadeTo(0f));
+        //yield return StartCoroutine(FadeTo(0f));
+        fadeAnimator.SetTrigger("Fade_In");
+
 
         // 8. Short pause
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // 9. Look to the side
         if (bedCamera != null)
@@ -250,23 +255,23 @@ public class BedInteractable : MonoBehaviour, IInteractable
         cameraTransform.rotation = targetRotation;
     }
 
-    private IEnumerator FadeTo(float targetAlpha)
-    {
-        float startAlpha = fadeCanvasGroup.alpha;
-        float time = 0;
+    //private IEnumerator FadeTo(float targetAlpha)
+    //{
+    //    float startAlpha = fadeCanvasGroup.alpha;
+    //    float time = 0;
 
-        while (time < fadeDuration)
-        {
-            time += Time.deltaTime;
-            float t = time / fadeDuration;
-            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
-            fadeCanvasGroup.blocksRaycasts = fadeCanvasGroup.alpha > 0.5f;
-            yield return null;
-        }
+    //    while (time < fadeDuration)
+    //    {
+    //        time += Time.deltaTime;
+    //        float t = time / fadeDuration;
+    //        fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+    //        fadeCanvasGroup.blocksRaycasts = fadeCanvasGroup.alpha > 0.5f;
+    //        yield return null;
+    //    }
 
-        fadeCanvasGroup.alpha = targetAlpha;
-        fadeCanvasGroup.blocksRaycasts = targetAlpha > 0.5f;
-    }
+    //    fadeCanvasGroup.alpha = targetAlpha;
+    //    fadeCanvasGroup.blocksRaycasts = targetAlpha > 0.5f;
+    //}
 
     private IEnumerator BlinkVignette()
     {
