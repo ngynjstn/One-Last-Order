@@ -12,6 +12,8 @@ public class PickupCup : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform handTransform;
 
+    private CoffeeInteractable coffeeInteractable;
+
     public void Interact()
     {
         Debug.Log("Attempting to pick up cup from machine.");
@@ -22,6 +24,9 @@ public class PickupCup : MonoBehaviour, IInteractable
         {
             PickUp(cup);
             // TODO: set isPlaced to false and m_interactable to true if coffee is given to customer in coffeeInteractable script
+            GameObject obj = GameObject.FindGameObjectWithTag("CoffeeMachine");
+            coffeeInteractable = obj.GetComponent<CoffeeInteractable>();
+            coffeeInteractable.isPlaced = false;
             Debug.Log("Cup picked up: " + cup.name);
         }
         else
@@ -52,7 +57,7 @@ public class PickupCup : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
