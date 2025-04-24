@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5270470836143408180}
   m_Layer: 0
   m_Name: cup
-  m_TagString: Untagged
+  m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,4 @@ MonoBehaviour:
   m_interactableHintText: Press E to pick up cup
   m_interactable: 1
   handTransform: {fileID: 0}
+  coffeeDone: 0

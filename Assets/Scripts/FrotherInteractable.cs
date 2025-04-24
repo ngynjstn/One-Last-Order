@@ -1,10 +1,8 @@
+using UnityEngine;
 using DefaultNamespace;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
-
-public class CoffeeInteractable : MonoBehaviour, IInteractable
-{
+public class FrotherInteractable : MonoBehaviour, IInteractable
+{    
     // The prompt text that appears when you're looking at an interactable.
     [SerializeField] private string m_interactableHintText = "Press E to interact";
     public string InteractableHintText => m_interactableHintText;
@@ -14,8 +12,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
-    [SerializeField] public bool isPlaced = false;
-    
+    public bool isPlaced = false;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -28,7 +25,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
             isPlaced = true;
 
             Debug.Log("Cup placed: " + access.name);
-            StartPouring();
+            StartFrothing();
             m_interactable = false;
         }
         else
@@ -57,7 +54,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -65,8 +62,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     {
 
     }
-    public ParticleSystem CoffeeStream;
-    public float hSliderValue = 0.0F;
+    public ParticleSystem FrothParticles;
     public PickupCup pickupCup;
     private IEnumerator EnablePickupAfterDelay(float delay)
     {
@@ -76,14 +72,13 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         pickupCup.coffeeDone = true;
         Debug.Log("Pickup is now interactable.");
     }
-    public void StartPouring() 
+    public void StartFrothing()
     {
-        AudioSource coffeeSound = GetComponent<AudioSource>();
-        coffeeSound.time = 2.2f;
-        coffeeSound.Play();
-        var main = CoffeeStream.main;
-        main.startDelay = hSliderValue;
-        CoffeeStream.Play(true);
-        StartCoroutine(EnablePickupAfterDelay(CoffeeStream.main.duration + hSliderValue));
+        Debug.Log("Frothing.");
+        AudioSource frothSound = GetComponent<AudioSource>();
+        frothSound.Play();
+        var main = FrothParticles.main;
+        FrothParticles.Play(true);
+        StartCoroutine(EnablePickupAfterDelay(FrothParticles.main.duration));
     }
 }

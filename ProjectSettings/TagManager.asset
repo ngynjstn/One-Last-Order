@@ -7,6 +7,8 @@ TagManager:
   - InteractableObject
   - JumpScare
   - Blocker
+  - CoffeeMachine
+  - Cup
   layers:
   - Default
   - TransparentFX
