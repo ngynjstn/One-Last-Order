@@ -71,6 +71,9 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     private IEnumerator EnablePickupAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        pickupCup.coffeeDone = true;
         Debug.Log("Pickup is now interactable.");
     }
     public void StartPouring() 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DefaultNamespace;
+using System.Collections;
 public class FrotherInteractable : MonoBehaviour, IInteractable
 {    
     // The prompt text that appears when you're looking at an interactable.
@@ -62,6 +63,15 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
 
     }
     public ParticleSystem FrothParticles;
+    public PickupCup pickupCup;
+    private IEnumerator EnablePickupAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        pickupCup.coffeeDone = true;
+        Debug.Log("Pickup is now interactable.");
+    }
     public void StartFrothing()
     {
         Debug.Log("Frothing.");
@@ -69,5 +79,6 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         frothSound.Play();
         var main = FrothParticles.main;
         FrothParticles.Play(true);
+        StartCoroutine(EnablePickupAfterDelay(FrothParticles.main.duration));
     }
 }

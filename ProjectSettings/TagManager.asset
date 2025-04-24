@@ -8,6 +8,7 @@ TagManager:
   - JumpScare
   - Blocker
   - CoffeeMachine
+  - Cup
   layers:
   - Default
   - TransparentFX
