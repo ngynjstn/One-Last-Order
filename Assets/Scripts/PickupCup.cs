@@ -13,7 +13,10 @@ public class PickupCup : MonoBehaviour, IInteractable
     [SerializeField] private Transform handTransform;
 
     private CoffeeInteractable coffeeInteractable;
-
+    public void EnableInteraction()
+    {
+        m_interactable = true;
+    }
     public void Interact()
     {
         Debug.Log("Attempting to pick up cup from machine.");
@@ -57,7 +60,7 @@ public class PickupCup : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        m_interactable = false;
     }
 
     // Update is called once per frame

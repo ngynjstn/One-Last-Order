@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -66,6 +67,12 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     }
     public ParticleSystem CoffeeStream;
     public float hSliderValue = 0.0F;
+    public PickupCup pickupCup;
+    private IEnumerator EnablePickupAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Pickup is now interactable.");
+    }
     public void StartPouring() 
     {
         AudioSource coffeeSound = GetComponent<AudioSource>();
@@ -74,5 +81,6 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         var main = CoffeeStream.main;
         main.startDelay = hSliderValue;
         CoffeeStream.Play(true);
+        StartCoroutine(EnablePickupAfterDelay(CoffeeStream.main.duration + hSliderValue));
     }
 }

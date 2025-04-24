@@ -1,6 +1,6 @@
 using UnityEngine;
 using DefaultNamespace;
-public class FrotherInteractable : MonoBehaviour
+public class FrotherInteractable : MonoBehaviour, IInteractable
 {    
     // The prompt text that appears when you're looking at an interactable.
     [SerializeField] private string m_interactableHintText = "Press E to interact";
@@ -61,20 +61,13 @@ public class FrotherInteractable : MonoBehaviour
     {
 
     }
-    /*
-    public ParticleSystem CoffeeStream;
-    public float hSliderValue = 0.0F;
-    */
+    public ParticleSystem FrothParticles;
     public void StartFrothing()
     {
         Debug.Log("Frothing.");
-        /*
-        AudioSource coffeeSound = GetComponent<AudioSource>();
-        coffeeSound.time = 2.2f;
-        coffeeSound.Play();
-        var main = CoffeeStream.main;
-        main.startDelay = hSliderValue;
-        CoffeeStream.Play(true);
-        */
+        AudioSource frothSound = GetComponent<AudioSource>();
+        frothSound.Play();
+        var main = FrothParticles.main;
+        FrothParticles.Play(true);
     }
 }
