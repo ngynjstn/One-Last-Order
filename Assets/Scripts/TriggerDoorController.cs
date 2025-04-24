@@ -1,38 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
-public class TriggerDoorController : MonoBehaviour
+public class MainDoorInteractable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Animator myDoor = null;
-    [SerializeField] private string openAnimationName = "DoorOpen"; // 
-    [SerializeField] private string closeAnimationName = "DoorClose"; //
-    [SerializeField] private bool startOpen = false; // Should the door start open?
-    private bool isOpen = false;
+    // The prompt text that appears when you're looking at an interactable.
+    [SerializeField] private string m_interactableHintText = "Press E to interact";
+    public string InteractableHintText => m_interactableHintText;
+    // Disable m_interactable thru ur script if you want things to be like, one use button type shi
+    [SerializeField] private bool m_interactable = true;
 
-    private void Start()
+    [SerializeField] private Animator doorAnimator;
+    public bool IsInteractable => m_interactable;
+    private bool doorOpen = false;
+    public void Interact()
     {
-        isOpen = startOpen;
-        if (myDoor != null)
+        Debug.Log("Interacted with " + gameObject.name);
+        doorOpen = !doorOpen;
+        if (doorOpen)
         {
-            myDoor.Play(isOpen ? openAnimationName : closeAnimationName);
+            // Code to open the fridge
+            Debug.Log("Door is now open.");
+            doorAnimator.SetTrigger("Open_Door");
         }
         else
         {
-            Debug.LogError($"{gameObject.name} requires an Animator component assigned to 'My Door'.");
-            enabled = false; // Disable the script if no Animator is assigned
+            // Code to close the fridge
+            Debug.Log("Door is now closed.");
+            doorAnimator.SetTrigger("Close_Door");
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        if (other.CompareTag("Player"))
-        {
-            if (myDoor != null)
-            {
-                isOpen = !isOpen; // Toggle the door state
-                myDoor.Play(isOpen ? openAnimationName : closeAnimationName, 0, 0.0f);
-            }
-        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }

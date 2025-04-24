@@ -308,7 +308,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92833151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f8397e9c15d18499b374f5dc8d8b90, type: 3}
   m_Name: 
@@ -4212,7 +4212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 1
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":242,"yPos":59},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"(This
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":65.66666,"yPos":30.6666565},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"(This
     isn''t the right way. I need to hurry home.)","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":null,"OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
