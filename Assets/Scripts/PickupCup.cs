@@ -7,9 +7,10 @@ public class PickupCup : MonoBehaviour, IInteractable
     public string InteractableHintText => m_interactableHintText;
     [SerializeField] private bool m_interactable = false;
 
-    // Different pickup states
+    // Different pickup and serving states
     private bool coffeePickupReady = false;
     private bool frothingComplete = false;
+    public bool isHotCoffee = false; // Track if coffee is hot (frothed) or cold
 
     // Check both conditions for interactability
     public bool IsInteractable => m_interactable && (coffeePickupReady || frothingComplete);
@@ -17,7 +18,8 @@ public class PickupCup : MonoBehaviour, IInteractable
     [SerializeField] private Transform handTransform;
     private CoffeeInteractable coffeeInteractable;
     public bool coffeeDone = false;
-    
+    public bool readyToServe = false; // Coffee is ready to be served
+
     public void Interact()
     {
         Debug.Log("Attempting to pick up cup from machine.");
@@ -46,8 +48,10 @@ public class PickupCup : MonoBehaviour, IInteractable
                         coffeeInteractable.isPlaced = false;
                     }
                 }
-                // Don't reset coffee state if just moving from coffee machine to frother
-                // This fixes the warning issue
+                // Coffee is cold by default if not frothed
+                isHotCoffee = false;
+                readyToServe = true;
+                Debug.Log("Cold coffee ready to serve");
             }
             // If we're picking up after frothing is complete
             else if (frothingComplete)
@@ -65,6 +69,11 @@ public class PickupCup : MonoBehaviour, IInteractable
                         frothScript.ResetFrotherState();
                     }
                 }
+
+                // Mark as hot coffee and ready to serve
+                isHotCoffee = true;
+                readyToServe = true;
+                Debug.Log("Hot coffee ready to serve");
             }
 
             Debug.Log("Cup picked up: " + cup.name);
@@ -113,11 +122,38 @@ public class PickupCup : MonoBehaviour, IInteractable
         }
     }
 
+    // Reset the cup after serving or discarding
+    public void ResetCup()
+    {
+        readyToServe = false;
+        isHotCoffee = false;
+        frothingComplete = false;
+        coffeePickupReady = false;
+        coffeeDone = false;
+
+        // Allow the player to get a new cup
+        GameObject cupDispenser = GameObject.FindGameObjectWithTag("CupDispenser");
+        if (cupDispenser != null)
+        {
+            CupInteractable dispScript = cupDispenser.GetComponent<CupInteractable>();
+            if (dispScript != null)
+            {
+                // Make cup dispenser interactable again
+                dispScript.ResetInteractable();
+            }
+        }
+
+        // Destroy this cup
+        Destroy(gameObject);
+    }
+
     void Start()
     {
         m_interactable = false;
         coffeePickupReady = false;
         frothingComplete = false;
+        readyToServe = false;
+        isHotCoffee = false;
     }
 
     void Update()
