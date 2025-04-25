@@ -16,6 +16,12 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject cup;
     [SerializeField] public bool isPlaced = false;
     public static bool IsMakingCoffee { get; private set; } = false;
+    public static bool CoffeeIsDone { get; private set; } = false;
+    public static void ResetCoffeeState()
+    {
+        CoffeeIsDone = false;
+        Debug.Log("Coffee state reset to: " + CoffeeIsDone);
+    }
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -26,7 +32,11 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
             Debug.LogWarning("Cannot make coffee while frothing!");
             return;
         }
-
+        if (CoffeeIsDone)
+        {
+            Debug.Log("Coffee is already done!");
+            return;
+        }
         GameObject access = CupInteractable.curr;
 
         if (access != null && !isPlaced)
@@ -80,8 +90,10 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
+        pickupCup.EnableCoffeePickup();
+        CoffeeIsDone = true;
         IsMakingCoffee = false;
-        Debug.Log("Pickup is now interactable.");
+        Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }
     public void StartPouring()
     {

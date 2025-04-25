@@ -14,13 +14,19 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject cup;
     public bool isPlaced = false;
     public static bool IsFrothing { get; private set; } = false;
+    public void ResetFrotherState()
+    {
+        isPlaced = false;
+        m_interactable = true;
+        Debug.Log("Frother state reset");
+    }
     public void Interact()
     {
-        Debug.Log("Interacted with " + gameObject.name);
+        Debug.Log("Interacted with " + gameObject.name + ". CoffeeIsDone: " + CoffeeInteractable.CoffeeIsDone);
 
-        if (CoffeeInteractable.IsMakingCoffee)
+        if (!CoffeeInteractable.CoffeeIsDone)
         {
-            Debug.LogWarning("Cannot froth while coffee is being made!");
+            Debug.LogWarning("You must make coffee first before frothing!");
             return;
         }
 
@@ -77,6 +83,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
+        pickupCup.CompleteFrothing();
         IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }
