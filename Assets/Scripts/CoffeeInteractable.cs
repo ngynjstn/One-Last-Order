@@ -15,20 +15,26 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
     [SerializeField] public bool isPlaced = false;
-    
+    public static bool IsMakingCoffee { get; private set; } = false;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+
+        // Check if frothing is happening
+        if (FrotherInteractable.IsFrothing)
+        {
+            Debug.LogWarning("Cannot make coffee while frothing!");
+            return;
+        }
 
         GameObject access = CupInteractable.curr;
 
         if (access != null && !isPlaced)
         {
-            PlaceCup(access);
             isPlaced = true;
-
             Debug.Log("Cup placed: " + access.name);
             StartPouring();
+            PlaceCup(access);
             m_interactable = false;
         }
         else
@@ -57,7 +63,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -74,10 +80,12 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
+        IsMakingCoffee = false;
         Debug.Log("Pickup is now interactable.");
     }
-    public void StartPouring() 
+    public void StartPouring()
     {
+        IsMakingCoffee = true;
         AudioSource coffeeSound = GetComponent<AudioSource>();
         coffeeSound.time = 2.2f;
         coffeeSound.Play();

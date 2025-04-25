@@ -13,9 +13,16 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
     public bool isPlaced = false;
+    public static bool IsFrothing { get; private set; } = false;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+
+        if (CoffeeInteractable.IsMakingCoffee)
+        {
+            Debug.LogWarning("Cannot froth while coffee is being made!");
+            return;
+        }
 
         GameObject access = CupInteractable.curr;
 
@@ -70,10 +77,12 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
+        IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }
     public void StartFrothing()
     {
+        IsFrothing = true;
         Debug.Log("Frothing.");
         AudioSource frothSound = GetComponent<AudioSource>();
         frothSound.Play();
@@ -81,4 +90,6 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         FrothParticles.Play(true);
         StartCoroutine(EnablePickupAfterDelay(FrothParticles.main.duration));
     }
+
+    
 }
