@@ -9,6 +9,8 @@ TagManager:
   - Blocker
   - CoffeeMachine
   - Cup
+  - Frother
+  - Customer
   layers:
   - Default
   - TransparentFX
