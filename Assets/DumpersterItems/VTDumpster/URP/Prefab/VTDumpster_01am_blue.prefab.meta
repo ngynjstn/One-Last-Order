@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: a6560a915ef98420e9faacc1c7438823
-NativeFormatImporter:
+guid: 1a4d830b6b68465419347134cf1eef47
+PrefabImporter:
   externalObjects: {}
-  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +10,5 @@ AssetOrigin:
   productId: 238654
   packageName: VTDumpster
   packageVersion: 1.0
-  assetPath: Assets/Settings/SampleSceneProfile.asset
+  assetPath: Assets/DuksGames/VTDumpster/URP/Prefab/VTDumpster_01am_blue.prefab
   uploadId: 548527
