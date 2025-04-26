@@ -19,6 +19,7 @@ public class DoorInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Animator fadeAnimator;
     [Header("UI References")]
     [SerializeField] private CanvasGroup fadeCanvasGroup;
+    
 
     private void Start()
     {
@@ -38,6 +39,12 @@ public class DoorInteractable : MonoBehaviour, IInteractable
     private IEnumerator LeaveRoomSequence()
     {
         Debug.Log("Leaving room...");
+
+        // Hide the interaction text here
+        if (m_interactableHintText != null)
+        {
+            m_interactableHintText = "";
+        }
 
         // Fade to black
         //yield return StartCoroutine(FadeTo(1f));
