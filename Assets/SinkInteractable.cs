@@ -1,0 +1,109 @@
+using DefaultNamespace;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class SinkInteractable : MonoBehaviour, IInteractable
+{
+    // The prompt text that appears when you're looking at an interactable.
+    [SerializeField] private string m_interactableHintText = "Press E to interact";
+    public string InteractableHintText => m_interactableHintText;
+    // Disable m_interactable thru ur script if you want things to be like, one use button type shi
+    [SerializeField] private bool m_interactable = true;
+    public bool IsInteractable => m_interactable;
+
+    [SerializeField] private Transform placeHolder;
+    [SerializeField] private GameObject cup;
+    [SerializeField] public bool isPlaced = false;
+    public static bool IsPouringWater { get; private set; } = false;
+    public static bool WaterIsDone { get; private set; } = false;
+    public static void ResetCoffeeState()
+    {
+        WaterIsDone = false;
+        Debug.Log("Coffee state reset to: " + WaterIsDone);
+    }
+    public void Interact()
+    {
+        Debug.Log("Interacted with " + gameObject.name);
+
+        // Check if frothing is happening
+        if (FrotherInteractable.IsFrothing)
+        {
+            Debug.LogWarning("Cannot make coffee while frothing!");
+            return;
+        }
+        if (WaterIsDone)
+        {
+            Debug.Log("Coffee is already done!");
+            return;
+        }
+        GameObject access = CupInteractable.curr;
+
+        if (access != null && !isPlaced)
+        {
+            isPlaced = true;
+            Debug.Log("Cup placed: " + access.name);
+            StartPouring();
+            PlaceCup(access);
+            m_interactable = false;
+        }
+        else
+        {
+            Debug.LogWarning("No cup to place or cup already placed.");
+        }
+    }
+    private void PlaceCup(GameObject cup)
+    {
+        // Move the existing cup to the machine placeholder
+        cup.transform.SetParent(placeHolder);
+        cup.transform.position = placeHolder.position;
+        cup.transform.rotation = placeHolder.rotation;
+
+        // Align properly
+        cup.transform.localPosition = Vector3.zero;
+        cup.transform.localRotation = Quaternion.identity;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+    }
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    public ParticleSystem WaterStream;
+    public float hSliderValue = 0.0F;
+    public PickupCup pickupCup;
+    private IEnumerator EnablePickupAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        pickupCup.coffeeDone = true;
+        pickupCup.EnableCoffeePickup();
+        WaterIsDone = true;
+        IsPouringWater = false;
+        Debug.Log("Coffee is done. Ready for pickup or frothing.");
+    }
+    public void StartPouring()
+    {
+        IsPouringWater = true;
+        AudioSource coffeeSound = GetComponent<AudioSource>();
+        coffeeSound.time = 2.2f;
+        coffeeSound.Play();
+        var main = WaterStream.main;
+        main.startDelay = hSliderValue;
+        WaterStream.Play(true);
+        StartCoroutine(EnablePickupAfterDelay(WaterStream.main.duration + hSliderValue));
+    }
+}
