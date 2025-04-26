@@ -20,6 +20,7 @@ public class ImageGradientToggle : MonoBehaviour
     {
         ConversationManager.OnConversationStarted -= ConversationStart;
         ConversationManager.OnConversationEnded -= ConversationEnd;
+        
     }
     void Start()
     {
