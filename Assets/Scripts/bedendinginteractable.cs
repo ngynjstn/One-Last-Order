@@ -31,7 +31,7 @@ public class BedInteractable : MonoBehaviour, IInteractable
     [SerializeField] private float jumpscareStareDuration = 5f;
 
     [Header("Camera Look Positions")]
-    [SerializeField] private Vector3 lookSideRotation = new Vector3(0, 30, 0);
+    [SerializeField] private Vector3 lookSideRotation = new Vector3(0, 65, 0);
     [SerializeField] private Vector3 lookUpRotation = new Vector3(30, 40, 0);
 
     [Header("Player References")]
