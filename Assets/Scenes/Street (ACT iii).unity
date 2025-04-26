@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 523408514}
   - component: {fileID: 523408513}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: JumpScare
   m_TagString: JumpScare
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2056,6 +2056,11 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: ba8485c9f7abe31419cca29d7c5ec5dc, type: 2}
+--- !u!4 &729622173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3162897567388082160, guid: d5f17bc12f82d7b4482815a1c660dc42, type: 3}
+  m_PrefabInstance: {fileID: 1728628550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &775044252 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5565062064087167157, guid: aabda9edadc904d45b479b7407c7f024, type: 3}
@@ -2084,6 +2089,37 @@ CapsuleCollider:
   m_Height: 3.2066019
   m_Direction: 1
   m_Center: {x: 0, y: 1.103301, z: 0}
+--- !u!1 &777328791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777328792}
+  m_Layer: 0
+  m_Name: LookTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &777328792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777328791}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.6146256, z: -0, w: 0.7888191}
+  m_LocalPosition: {x: -24.99, y: 1.84, z: -19.68}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -75.849, z: 0}
 --- !u!1 &784548519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3691845272333378643, guid: a93ae0234095b994896853b80cbd770f, type: 3}
@@ -4250,7 +4286,7 @@ Transform:
   m_GameObject: {fileID: 1417524432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6146256, z: -0, w: 0.7888191}
-  m_LocalPosition: {x: -26.104, y: 0.608, z: -19.404}
+  m_LocalPosition: {x: -24.99, y: 0.608, z: -19.68}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4481,8 +4517,9 @@ GameObject:
   - component: {fileID: 1494208531}
   - component: {fileID: 1494208530}
   - component: {fileID: 1494208529}
+  - component: {fileID: 1494208533}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: JumpScareCollider
   m_TagString: JumpScare
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4570,12 +4607,28 @@ Transform:
   m_GameObject: {fileID: 1494208528}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.07, y: 0.4782, z: -20.8851}
+  m_LocalPosition: {x: -28.07, y: 0.4782, z: -19.398}
   m_LocalScale: {x: 1, y: 4.0268197, z: 28.84316}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494208533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494208528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42758f7341b50345bbcdeeb21b353f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookTarget: {fileID: 777328792}
+  lookDuration: 8
+  rotationSpeed: 30
+  playerCamera: {fileID: 729622173}
 --- !u!1 &1516996025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2041100964824354812, guid: a93ae0234095b994896853b80cbd770f, type: 3}
@@ -6276,6 +6329,7 @@ SceneRoots:
   - {fileID: 1494208532}
   - {fileID: 523408516}
   - {fileID: 1417524433}
+  - {fileID: 777328792}
   - {fileID: 542289974}
   - {fileID: 266296325}
   - {fileID: 1167005274}
