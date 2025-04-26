@@ -2,17 +2,44 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 using System.Collections;
+using UnityEngine.Pool;
+using DefaultNamespace;
+using DialogueEditor;
 
-public class CustomerNPC : MonoBehaviour
+public class CustomerNPC : MonoBehaviour, IInteractable
 {
+
     public event Action OnCustomerComplete;
     
     protected NavMeshAgent agent;
+    public Animator animator;
+
     protected bool interactionComplete = false;
+    public bool TalkedToCustomerOnce = false;
+    public NPCConversation beginningDialogue;
+    public NPCConversation hasNoDrinkYet;
+    public string playersCurrentDrink = "";
+    public bool playerHasFinalDrink = false;
+    public bool reachedCounter;
+    
+
+    public string InteractableHintText => "Press E to Talk with Customer";
+
+    public bool IsInteractable => m_isInteractable;
+    public bool m_isInteractable = true;
 
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+    public void Update()
+    {
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+    }
+    public void SetTalkedToCustomerOnce()
+    {
+        TalkedToCustomerOnce = true;
+        //m_isInteractable = false;
     }
 
     public virtual void SetDestination(Vector3 position)
@@ -36,5 +63,28 @@ public class CustomerNPC : MonoBehaviour
     {
         // Implementation for customer leaving the store
         yield return null;
+    }
+
+    public void Interact()
+    {
+        if (!TalkedToCustomerOnce)
+        {
+            ConversationManager.Instance.StartConversation(beginningDialogue);
+            return;
+        }
+
+        if (!playerHasFinalDrink) {
+            // Handle the case where the player has the final drink
+            Debug.Log("Player has the final drink.");
+            // You can add logic here to give the drink to the customer or whatever is needed
+            //CompleteInteraction();
+            ConversationManager.Instance.StartConversation(hasNoDrinkYet);
+            return;
+        }
+
+
+        // Handle the case where the customer has already been talked to
+        Debug.Log("Customer has already been talked to.");
+
     }
 }

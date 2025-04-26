@@ -21,21 +21,44 @@ public class ActII_StoryManager : MonoBehaviour
     private bool customerInProgress = false;
     private GameObject currentCustomer;
 
-    public NPCConversation dialogueObject;
+    [Header("Dialogues")]
+    public NPCConversation beginningDialogue;
+    public NPCConversation gotoCounterDialogue;
+    public NPCConversation lookedAtRecipeSheetDialogue;
+
+
+    [Header("Game objects necessary to subscribe to events")]
+    [SerializeField] public LightToggleInteractable sign;
+
     private void Start()
     {
         fadeAnimator.SetTrigger("Fade_In");
         WaitForSeconds wait = new WaitForSeconds(5f);
-        ConversationManager.Instance.StartConversation(dialogueObject);
         StartCoroutine(StartStorySequence());
-    }
 
-    private IEnumerator StartStorySequence()
+    }
+    /// ///BEGINNING TASK SEQUENCES
+    public IEnumerator StartStorySequence()
     {
         yield return new WaitForSeconds(initialDelay);
+        ConversationManager.Instance.StartConversation(beginningDialogue);
+    }
+    public void subscribetolight()
+    {
+        sign.LightToggledOn += signGotTurnedOn;
+    }
+    public void signGotTurnedOn() {
+        ConversationManager.Instance.StartConversation(gotoCounterDialogue);
+        sign.LightToggledOn -= signGotTurnedOn;
+    }
+    public void recipeSignLookedAt()
+    {
         SpawnNextCustomer();
     }
 
+    /// <summary>
+    /// STORY DIALOGUE
+    /// </summary>
     private void SpawnNextCustomer()
     {
         if (currentCustomerIndex >= customerPrefabs.Length || customerInProgress)
@@ -51,7 +74,7 @@ public class ActII_StoryManager : MonoBehaviour
             npc.SetDestination(counterPoint.position);
         }
     }
-
+    
     private void HandleCustomerComplete()
     {
         if (currentCustomer != null)

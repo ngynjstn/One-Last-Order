@@ -3,6 +3,7 @@ using TMPro; // Required for TextMesh Pro
 using System.Collections;
 using DialogueEditor;
 using DefaultNamespace;
+using System;
 
 public class LightToggleInteractable : MonoBehaviour, IInteractable
 {
@@ -27,7 +28,10 @@ public class LightToggleInteractable : MonoBehaviour, IInteractable
 
     [Header("Light")]
     [SerializeField] private Light targetLight; // Assign the light you want to toggle here
-    private bool isLightOn = true;
+
+    public Action LightToggledOn; // Event to notify when the light is toggled
+    public Action LightToggledOff; // Event to notify when the light is toggled
+    private bool isLightOn = false;
 
     private bool hasToggledLight = false; // Added to prevent repeated toggles if needed
 
@@ -66,6 +70,7 @@ public class LightToggleInteractable : MonoBehaviour, IInteractable
             hasToggledLight = true; //set to true, so it only happens once.  Remove this line if you want the light to toggle every time.
             StartCoroutine(LightToggleSequence()); // Renamed coroutine
         }
+
     }
 
     private IEnumerator LightToggleSequence() // Renamed coroutine
@@ -83,24 +88,34 @@ public class LightToggleInteractable : MonoBehaviour, IInteractable
         {
             targetLight.enabled = !targetLight.enabled; // Toggle the light's state
             isLightOn = targetLight.enabled;
+            if (isLightOn)
+            {
+                LightToggledOn?.Invoke(); // Invoke the event to notify subscribers
+                Debug.Log("Light turned on.");
+            }
+            else
+            {
+                LightToggledOff?.Invoke(); // Invoke the event to notify subscribers
+                Debug.Log("Light turned off.");
+            }
+
+            // 4. Fade back in
+            //fadeAnimator.SetTrigger("Fade_In");
+
+            // 5. Show message after fade in
+            //lightMessageText.gameObject.SetActive(true);
+            //lightMessageText.text = isLightOn ? lightToggledOnMessage : lightToggledOffMessage; // Use the correct message
+
+            // 6. Display message for specified duration
+            // yield return new WaitForSeconds(messageDisplayDuration);
+
+            // 7. Hide message
+            //lightMessageText.gameObject.SetActive(false);
+
+            // 8. Clear the interaction hint text and disable interaction.  Keep this, assuming you want this behavior.
+            m_interactableHintText = "";
+            //m_interactable = false; // Disable interaction to prevent multiple triggers
+            Debug.Log("Light toggle complete."); //Updated debug message
         }
-
-        // 4. Fade back in
-        //fadeAnimator.SetTrigger("Fade_In");
-
-        // 5. Show message after fade in
-        //lightMessageText.gameObject.SetActive(true);
-        //lightMessageText.text = isLightOn ? lightToggledOnMessage : lightToggledOffMessage; // Use the correct message
-
-        // 6. Display message for specified duration
-       // yield return new WaitForSeconds(messageDisplayDuration);
-
-        // 7. Hide message
-        //lightMessageText.gameObject.SetActive(false);
-
-        // 8. Clear the interaction hint text and disable interaction.  Keep this, assuming you want this behavior.
-        m_interactableHintText = "";
-        m_interactable = false; // Disable interaction to prevent multiple triggers
-        Debug.Log("Light toggle complete."); //Updated debug message
     }
 }
