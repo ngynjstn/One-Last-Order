@@ -189,6 +189,7 @@ namespace DialogueEditor
 
         public void PressSelectedOption()
         {
+            if (m_state == eState.ScrollingText) { m_scrollIndex = m_targetScrollTextCount - 1; }
             if (m_state != eState.Idle) { return; }
             if (m_currentSelectedIndex < 0) { return; }
             if (m_currentSelectedIndex >= m_uiOptions.Count) { return; }
