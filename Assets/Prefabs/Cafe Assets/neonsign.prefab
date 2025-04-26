@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1408743397759466337}
+  - component: {fileID: -257154405716398130}
+  - component: {fileID: 8175175441177401806}
   m_Layer: 0
   m_Name: neonsign
   m_TagString: Untagged
@@ -25,14 +27,56 @@ Transform:
   m_GameObject: {fileID: 1048189515367831635}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -49.955, y: -5.68, z: 16.53}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6748587027574112997}
   - {fileID: 4915672938468605558}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-257154405716398130
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048189515367831635}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8175175441177401806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048189515367831635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e858441a7b285e34cada7fc99ecc9cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_interactableHintText: Press E to Toggle Light
+  m_interactable: 1
+  fadeDuration: 1
+  fadeAnimator: {fileID: 0}
+  fadeCanvasGroup: {fileID: 0}
+  lightMessageText: {fileID: 0}
+  lightToggledOnMessage: Light Turned On
+  lightToggledOffMessage: Light Turned Off
+  targetLight: {fileID: 8562897614509743894}
 --- !u!1 &3721618625426556884
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,9 +297,9 @@ Light:
   m_Enabled: 0
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 1, g: 0.14509803, b: 0.16206887, a: 1}
+  m_Color: {r: 0.9811321, g: 0.05556472, b: 0, a: 1}
   m_Intensity: 331.1
-  m_Range: 1.1206236
+  m_Range: 1.0912548
   m_SpotAngle: 179
   m_InnerSpotAngle: 170.80208
   m_CookieSize: 10
