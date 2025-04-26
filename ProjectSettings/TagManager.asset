@@ -11,6 +11,7 @@ TagManager:
   - Cup
   - Frother
   - Customer
+  - Look
   layers:
   - Default
   - TransparentFX
