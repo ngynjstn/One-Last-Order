@@ -1,65 +1,88 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class LookController : MonoBehaviour
+public class TeleportAndLook : MonoBehaviour
 {
-    [Header("Look Target")]
-    [SerializeField] private Transform lookTarget;  // The position to look at
-    [SerializeField] private float lookDuration = 2f;  // How long the look takes
-    [SerializeField] private float rotationSpeed = 2f;  // Rotation speed multiplier
+    [Tooltip("The Transform of the object where the player will be teleported.")]
+    public Transform teleportTarget;
 
-    [Header("Player Reference")]
-    [SerializeField] private Transform playerCamera;  // Assign the player's camera transform
+    [Tooltip("The Transform of the object the camera will look at after teleporting.")]
+    public Transform lookAtTarget;
 
-    private bool hasTriggered = false;
-    private Quaternion initialRotation;
+    [Tooltip("The specific Camera GameObject to control. If left empty, it will try to find the MainCamera.")]
+    public GameObject cameraToControl;
 
-    private void OnTriggerEnter(Collider other)
+    [Tooltip("The tag of the player GameObject.")]
+    public string playerTag = "Look";
+
+    [Tooltip("Should this script disable itself after triggering once?")]
+    public bool disableAfterTrigger = true;
+
+    private Camera mainCameraComponent; // To store the Camera component
+    private bool hasTriggered = false; // Flag to track if the teleport has happened
+
+    void Start()
     {
-        if (other.CompareTag("Player") && !hasTriggered)
+        // Get the Camera component. Prioritize the assigned one, then try to find the MainCamera.
+        if (cameraToControl != null)
         {
+            mainCameraComponent = cameraToControl.GetComponent<Camera>();
+            if (mainCameraComponent == null)
+            {
+                Debug.LogError("The assigned 'Camera To Control' GameObject does not have a Camera component on " + gameObject.name);
+                enabled = false;
+                return;
+            }
+        }
+        else
+        {
+            Camera tempCamera = Camera.main;
+            if (tempCamera != null)
+            {
+                mainCameraComponent = tempCamera;
+            }
+            else
+            {
+                Debug.LogError("No MainCamera found in the scene and no Camera assigned in the Inspector on " + gameObject.name);
+                enabled = false;
+                return;
+            }
+        }
+
+        // Basic error checking for the teleport target.
+        if (teleportTarget == null)
+        {
+            Debug.LogError("Teleport Target is not assigned on " + gameObject.name);
+            enabled = false; // Disable the script if the target is missing.
+        }
+
+        if (lookAtTarget == null)
+        {
+            Debug.LogWarning("Look At Target is not assigned on " + gameObject.name + ". Camera will not be locked.");
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the colliding object has the specified player tag and if it hasn't triggered yet.
+        if (other.CompareTag(playerTag) && !hasTriggered)
+        {
+            // Teleport the player to the target position.
+            other.transform.position = teleportTarget.position;
+
+            // If a lookAtTarget is assigned and we have a valid camera, make the camera look at it.
+            if (lookAtTarget != null && mainCameraComponent != null)
+            {
+                mainCameraComponent.transform.LookAt(lookAtTarget);
+            }
+
+            // Set the flag to indicate that the trigger has occurred.
             hasTriggered = true;
-            initialRotation = playerCamera.rotation;
-            StartCoroutine(RotateToLook());
-        }
-    }
 
-    private IEnumerator RotateToLook()
-    {
-        // Add at the start of RotateToLook():
-        PlayerInput playerInput = playerCamera.GetComponentInParent<PlayerInput>();
-        playerInput.enabled = false;
-
-        // Add at the end of RotateToLook():
-        playerInput.enabled = true;
-
-        float elapsedTime = 0f;
-        Vector3 directionToTarget = lookTarget.position - playerCamera.position;
-        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-
-        while (elapsedTime < lookDuration)
-        {
-            playerCamera.rotation = Quaternion.Slerp(
-                initialRotation,
-                targetRotation,
-                (elapsedTime / lookDuration) * rotationSpeed);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // Ensure perfect alignment at the end
-        playerCamera.rotation = targetRotation;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (lookTarget != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, lookTarget.position);
-            Gizmos.DrawWireSphere(lookTarget.position, 0.25f);
+            // Disable the script if the option is enabled.
+            if (disableAfterTrigger)
+            {
+                enabled = false;
+            }
         }
     }
 }
