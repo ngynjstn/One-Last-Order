@@ -12,6 +12,7 @@ TagManager:
   - Frother
   - Customer
   - Look
+  - CupSpawner
   layers:
   - Default
   - TransparentFX
