@@ -9,7 +9,6 @@ public class LidInteractable : MonoBehaviour, IInteractable
     // Set to true to continuous make drinks
     [SerializeField] private bool m_interactable = true;
     [SerializeField] public bool IsInteractable => m_interactable;
-    [SerializeField] private GameObject lid;
 
     public void ResetInteractable()
     {
@@ -24,21 +23,17 @@ public class LidInteractable : MonoBehaviour, IInteractable
         if (access != null)
         {
             Debug.Log("Cup placed: " + access.name);
+            AddLid();
+            Debug.Log(access);
             m_interactable = false;
         }
         else
         {
-            Debug.LogWarning("No cup to place or cup already placed.");
-        }
-        if (lid != null)
-        {
-            AddLid();
-            Debug.Log(access);
-            m_interactable = false;
-            // TODO: change m_interactable to true when coffee is given
+            Debug.LogWarning("No cup in hand to add lid.");
         }
     }
     public PickupCup pickupCup;
+    public MeshRenderer mesh;
     private void AddLid()
     {
         GameObject access = CupInteractable.curr;
@@ -52,6 +47,8 @@ public class LidInteractable : MonoBehaviour, IInteractable
             if (lidTransform != null)
             {
                 lidTransform.gameObject.SetActive(true);
+                mesh = obj.GetComponent<MeshRenderer>();
+                mesh.enabled = false;
                 pickupCup.AddContent("lid");
                 Debug.Log("Lid activated!");
                 Debug.Log(string.Join(", ", pickupCup.cupContents));

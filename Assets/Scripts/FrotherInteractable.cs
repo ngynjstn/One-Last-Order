@@ -26,7 +26,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
 
         if (!CoffeeInteractable.CoffeeIsDone)
         {
-            Debug.LogWarning("You must make coffee first before frothing!");
+            Debug.LogWarning("You must pour milk first before frothing!");
             return;
         }
 

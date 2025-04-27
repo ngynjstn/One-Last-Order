@@ -96,7 +96,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         pickupCup.AddContent("coffee");
         CoffeeIsDone = true;
         IsMakingCoffee = false;
-        Debug.Log("Coffee is done. Ready for pickup or frothing.");
+        Debug.Log("Coffee is done. Ready to serve or add ice.");
     }
     public void StartPouring()
     {

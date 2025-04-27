@@ -15,6 +15,9 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+        AudioSource trashSound = gameObject.GetComponent<AudioSource>();
+        trashSound.time = 1.4f;
+        trashSound.Play();
         cupInteractable.ResetCupInteractable();
         coffeeInteractable.ResetCoffeeState();
         frotherInteractable.ResetFrotherState();
