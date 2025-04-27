@@ -16,7 +16,7 @@ public class CupInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] public static GameObject curr;
 
-    public void ResetInteractable()
+    public void ResetCupInteractable()
     {
         m_interactable = true;
         Debug.Log("Cup dispenser reset and ready to dispense a new cup");

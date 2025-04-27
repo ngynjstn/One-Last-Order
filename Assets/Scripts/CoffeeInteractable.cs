@@ -17,11 +17,13 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] public bool isPlaced = false;
     public static bool IsMakingCoffee { get; private set; } = false;
     public static bool CoffeeIsDone { get; private set; } = false;
-    public static void ResetCoffeeState()
+    public void ResetCoffeeState()
     {
         CoffeeIsDone = false;
+        m_interactable = true;
         Debug.Log("Coffee state reset to: " + CoffeeIsDone);
     }
+
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -91,6 +93,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
+        pickupCup.AddContent("coffee");
         CoffeeIsDone = true;
         IsMakingCoffee = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");

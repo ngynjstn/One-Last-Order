@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.Pool;
 using DefaultNamespace;
 using DialogueEditor;
+using System.Collections.Generic;
 
 public class CustomerNPC : MonoBehaviour, IInteractable
 {
@@ -28,6 +29,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public bool IsInteractable => m_isInteractable;
     public bool m_isInteractable = true;
 
+    PickupCup pickupCup;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -80,10 +82,20 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        List<string> drink = pickupCup.cupContents;
+
+        if (drink.Contains("coffee") && drink.Contains("frother"))
+        {
+            playerHasFinalDrink = true;
+            Debug.Log("Drink contains what's needed.");
+            CompleteInteraction();
+        }
 
         if (!playerHasFinalDrink) {
             // Handle the case where the player has the final drink
-            Debug.Log("Player has the final drink.");
+            Debug.Log("Player won't take the drink. It's incomplete.");
             // You can add logic here to give the drink to the customer or whatever is needed
             //CompleteInteraction();
             ConversationManager.Instance.StartConversation(hasNoDrinkYet);
@@ -92,7 +104,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
 
 
         // Handle the case where the customer has already been talked to
-        Debug.Log("Customer has already been talked to.");
+        // Debug.Log("Customer has already been talked to.");
 
     }
 }
