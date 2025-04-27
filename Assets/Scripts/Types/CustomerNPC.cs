@@ -37,6 +37,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public void Update()
     {
         animator.SetFloat("Speed", agent.velocity.magnitude);
+
         if (NavMeshWrapper.ReachedDestinationOrGaveUp(agent) && !reachedCounter)
         {
             reachedCounter = true;
@@ -44,6 +45,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             agent.ResetPath();
             // Handle the case where the customer has reached the counter
             Debug.Log("Customer has reached the counter.");
+            FaceThePlayer();
             return;
         }
     }
@@ -51,6 +53,14 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     {
         TalkedToCustomerOnce = true;
         //m_isInteractable = false;
+    }
+    private void FaceThePlayer()
+    {
+        GameObject m_player = GameObject.FindGameObjectWithTag("Player");
+        // Implementation for facing the player
+        Vector3 direction = (m_player.transform.position - this.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        this.transform.rotation = lookRotation;
     }
     public virtual void SetDestination(Vector3 position)
     {

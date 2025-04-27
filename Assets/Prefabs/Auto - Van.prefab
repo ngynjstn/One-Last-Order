@@ -963,6 +963,7 @@ GameObject:
   - component: {fileID: 4744149244216140832}
   - component: {fileID: 7179646419294542935}
   - component: {fileID: 8575861777022828541}
+  - component: {fileID: 1643790991191157070}
   m_Layer: 0
   m_Name: Auto - Van
   m_TagString: Untagged
@@ -1051,6 +1052,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1643790991191157070
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444552681977429006}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.082008615, y: 0.034401163, z: 0.02928353}
+  m_Center: {x: 0.0026570559, y: 0.000021072101, z: 0.0029076738}
 --- !u!1 &8656851436382959809
 GameObject:
   m_ObjectHideFlags: 0
