@@ -84,6 +84,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
         pickupCup.CompleteFrothing();
+        pickupCup.AddContent("frother");
         IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }

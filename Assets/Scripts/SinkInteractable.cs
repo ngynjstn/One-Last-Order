@@ -91,6 +91,7 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
+        pickupCup.AddContent("water");
         WaterIsDone = true;
         IsPouringWater = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");

@@ -9,11 +9,7 @@ public class LidInteractable : MonoBehaviour, IInteractable
     // Set to true to continuous make drinks
     [SerializeField] private bool m_interactable = true;
     [SerializeField] public bool IsInteractable => m_interactable;
-    [SerializeField] private GameObject cup;
-    [SerializeField] private Transform handTransform;
-    [SerializeField] private GameObject currentCup;
-    [SerializeField] private Transform playerCameraTransform;
-    [SerializeField] public static GameObject curr;
+    [SerializeField] private GameObject lid;
 
     public void ResetInteractable()
     {
@@ -23,31 +19,53 @@ public class LidInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+        GameObject access = CupInteractable.curr;
 
-        if (cup != null && handTransform != null)
+        if (access != null)
         {
-            curr = SpawnCup();
-            Debug.Log(curr);
+            Debug.Log("Cup placed: " + access.name);
+            m_interactable = false;
+        }
+        else
+        {
+            Debug.LogWarning("No cup to place or cup already placed.");
+        }
+        if (lid != null)
+        {
+            AddLid();
+            Debug.Log(access);
             m_interactable = false;
             // TODO: change m_interactable to true when coffee is given
         }
     }
-    private GameObject SpawnCup()
+    public PickupCup pickupCup;
+    private void AddLid()
     {
-        currentCup = Instantiate(cup, handTransform.position, handTransform.rotation);
-        currentCup.transform.SetParent(handTransform);
-        currentCup.transform.localPosition = Vector3.zero;
-        currentCup.transform.localRotation = Quaternion.identity;
-        PickupCup pickupScript = currentCup.GetComponent<PickupCup>();
-        pickupScript.SetHand(handTransform);
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb)
+        GameObject access = CupInteractable.curr;
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        if (access != null)
         {
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            // Find the child named "Lid" inside the current cup
+            Transform lidTransform = access.transform.Find("Tumbler");
+
+            if (lidTransform != null)
+            {
+                lidTransform.gameObject.SetActive(true);
+                pickupCup.AddContent("lid");
+                Debug.Log("Lid activated!");
+                Debug.Log(string.Join(", ", pickupCup.cupContents));
+            }
+            else
+            {
+                Debug.LogWarning("Lid not found on cup.");
+            }
         }
-        return currentCup;
+        else
+        {
+            Debug.LogWarning("No current cup to add lid to.");
+        }
+        
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -1,4 +1,5 @@
 using DefaultNamespace;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupCup : MonoBehaviour, IInteractable
@@ -19,6 +20,12 @@ public class PickupCup : MonoBehaviour, IInteractable
     private CoffeeInteractable coffeeInteractable;
     public bool coffeeDone = false;
     public bool readyToServe = false; // Coffee is ready to be served
+    [SerializeField] public List<string> cupContents = new List<string>();
+    public void AddContent(string content)
+    {
+        cupContents.Add(content);
+        Debug.Log($"Added {content} to cup.");
+    }
 
     public void Interact()
     {
@@ -57,7 +64,7 @@ public class PickupCup : MonoBehaviour, IInteractable
             else if (frothingComplete)
             {
                 // Reset coffee state only after the entire process is complete
-                CoffeeInteractable.ResetCoffeeState();
+                // CoffeeInteractable.ResetCoffeeState();
 
                 // Find and reset frother
                 GameObject frother = GameObject.FindGameObjectWithTag("Frother");
@@ -139,7 +146,7 @@ public class PickupCup : MonoBehaviour, IInteractable
             if (dispScript != null)
             {
                 // Make cup dispenser interactable again
-                dispScript.ResetInteractable();
+                dispScript.ResetCupInteractable();
             }
         }
 

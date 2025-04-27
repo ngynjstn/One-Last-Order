@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.Pool;
 using DefaultNamespace;
 using DialogueEditor;
+using System.Collections.Generic;
 
 public class CustomerNPC : MonoBehaviour, IInteractable
 {
@@ -28,6 +29,10 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public bool IsInteractable => m_isInteractable;
     public bool m_isInteractable = true;
 
+    public PickupCup pickupCup;
+    public CoffeeInteractable coffeeInteractable;
+    public FrotherInteractable frotherInteractable;
+    public CupInteractable cupInteractable;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -90,10 +95,30 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
+        GameObject cup = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = cup.GetComponent<PickupCup>();
+        GameObject coffeeMachine = GameObject.FindGameObjectWithTag("CoffeeMachine");
+        coffeeInteractable = coffeeMachine.GetComponent<CoffeeInteractable>();
+        GameObject frother = GameObject.FindGameObjectWithTag("Frother");
+        frotherInteractable = frother.GetComponent<FrotherInteractable>();
+        GameObject spawner = GameObject.FindGameObjectWithTag("CupSpawner");
+        cupInteractable = spawner.GetComponent<CupInteractable>();
+        List<string> drink = pickupCup.cupContents;
+
+        if (drink.Contains("coffee") && drink.Contains("frother"))
+        {
+            playerHasFinalDrink = true;
+            Debug.Log("Drink contains what's needed.");
+            cupInteractable.ResetCupInteractable();
+            coffeeInteractable.ResetCoffeeState();
+            frotherInteractable.ResetFrotherState();
+            Destroy(cup);
+            CompleteInteraction();
+        }
 
         if (!playerHasFinalDrink) {
             // Handle the case where the player has the final drink
-            Debug.Log("Player has the final drink.");
+            Debug.Log("Player won't take the drink. It's incomplete.");
             // You can add logic here to give the drink to the customer or whatever is needed
             //CompleteInteraction();
             ConversationManager.Instance.StartConversation(hasNoDrinkYet);
@@ -102,7 +127,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
 
 
         // Handle the case where the customer has already been talked to
-        Debug.Log("Customer has already been talked to.");
+        // Debug.Log("Customer has already been talked to.");
 
     }
 }
