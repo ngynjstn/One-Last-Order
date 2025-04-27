@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aae80e20477b2541bd9fc6d1f30d53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactDistance: 1.5
+  m_interactDistance: 2.5
   m_uiHintTextElement: {fileID: 8290030183082345744}
   m_playerCamera: {fileID: 8468091101805924879}
 --- !u!114 &443298160012692760
