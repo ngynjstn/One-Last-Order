@@ -29,7 +29,10 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public bool IsInteractable => m_isInteractable;
     public bool m_isInteractable = true;
 
-    PickupCup pickupCup;
+    public PickupCup pickupCup;
+    public CoffeeInteractable coffeeInteractable;
+    public FrotherInteractable frotherInteractable;
+    public CupInteractable cupInteractable;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -92,14 +95,24 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
-        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
+        GameObject cup = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = cup.GetComponent<PickupCup>();
+        GameObject coffeeMachine = GameObject.FindGameObjectWithTag("CoffeeMachine");
+        coffeeInteractable = coffeeMachine.GetComponent<CoffeeInteractable>();
+        GameObject frother = GameObject.FindGameObjectWithTag("Frother");
+        frotherInteractable = frother.GetComponent<FrotherInteractable>();
+        GameObject spawner = GameObject.FindGameObjectWithTag("CupSpawner");
+        cupInteractable = spawner.GetComponent<CupInteractable>();
         List<string> drink = pickupCup.cupContents;
 
         if (drink.Contains("coffee") && drink.Contains("frother"))
         {
             playerHasFinalDrink = true;
             Debug.Log("Drink contains what's needed.");
+            cupInteractable.ResetCupInteractable();
+            coffeeInteractable.ResetCoffeeState();
+            frotherInteractable.ResetFrotherState();
+            Destroy(cup);
             CompleteInteraction();
         }
 

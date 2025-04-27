@@ -334,6 +334,9 @@ MonoBehaviour:
   playerHasFinalDrink: 0
   reachedCounter: 0
   m_isInteractable: 1
+  coffeeInteractable: {fileID: 0}
+  frotherInteractable: {fileID: 0}
+  cupInteractable: {fileID: 0}
 --- !u!136 &6967679468766009210
 CapsuleCollider:
   m_ObjectHideFlags: 0
