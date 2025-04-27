@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7349679273281388835}
   - component: {fileID: 5192945461233664950}
   - component: {fileID: 3268872405159360179}
+  - component: {fileID: 8587995396852071535}
   m_Layer: 0
   m_Name: Door_F.001
   m_TagString: Untagged
@@ -111,6 +112,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3364500556766806299, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
+--- !u!114 &8587995396852071535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736313322996642987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 1
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_StartTransform: {fileID: 0}
+  m_EndTransform: {fileID: 0}
+  m_Activated: 1
+  m_Width: 0
+  m_CostModifier: 1
+  m_IsOverridingCost: 0
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &2587832621585595858
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +317,7 @@ GameObject:
   - component: {fileID: 4542619569954652172}
   - component: {fileID: 8148065288914786298}
   - component: {fileID: 3032917385011593700}
+  - component: {fileID: 9016987184231998261}
   m_Layer: 0
   m_Name: Door_F
   m_TagString: Untagged
@@ -411,6 +438,31 @@ MonoBehaviour:
   dumpsterMessageText: {fileID: 0}
   messageDisplayDuration: 2
   trashChangedMessage: You have locked the door
+--- !u!114 &9016987184231998261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7208437441931479624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 1
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_StartTransform: {fileID: 0}
+  m_EndTransform: {fileID: 0}
+  m_Activated: 1
+  m_Width: 0
+  m_CostModifier: 1
+  m_IsOverridingCost: 0
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1 &7450686438118666204
 GameObject:
   m_ObjectHideFlags: 0
