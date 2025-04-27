@@ -35,13 +35,21 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public void Update()
     {
         animator.SetFloat("Speed", agent.velocity.magnitude);
+        if (NavMeshWrapper.ReachedDestinationOrGaveUp(agent) && !reachedCounter)
+        {
+            reachedCounter = true;
+            agent.isStopped = true;
+            agent.ResetPath();
+            // Handle the case where the customer has reached the counter
+            Debug.Log("Customer has reached the counter.");
+            return;
+        }
     }
     public void SetTalkedToCustomerOnce()
     {
         TalkedToCustomerOnce = true;
         //m_isInteractable = false;
     }
-
     public virtual void SetDestination(Vector3 position)
     {
         if (agent != null)
