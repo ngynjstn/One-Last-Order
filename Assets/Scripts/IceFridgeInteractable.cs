@@ -16,13 +16,22 @@ public class IceFridgeInteractable : MonoBehaviour, IInteractable
 
     public void Interact(InteractionController interactionController)
     {
-        Debug.Log("Interacted with " + gameObject.name);
-
-        GameObject access = CupInteractable.curr;
-
-        if (access != null)
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        if (obj != null)
         {
-            StartPouring();
+            pickupCup = obj.GetComponent<PickupCup>();
+            Debug.Log("Interacted with " + gameObject.name);
+
+            GameObject access = CupInteractable.curr;
+
+            if (access != null && !pickupCup.isPlaced)
+            {
+                StartPouring();
+            }
+            else
+            {
+                Debug.LogWarning("No cup in hand.");
+            }
         }
         else
         {

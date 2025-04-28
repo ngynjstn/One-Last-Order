@@ -26,33 +26,29 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Player");
+        GameObject obj1 = GameObject.FindGameObjectWithTag("Cup");
+        
         //GameObject obj = interactionController.;
-        if (obj != null)
+        if (obj1 != null)
         {
-            //cupManager = obj.GetComponent<CupManager>();
-            cupManager = interactionController.GetComponent<CupManager>();
-            if (cupManager.cupContents.Contains("lid"))
+            pickupCup = obj1.GetComponent<PickupCup>();
+            if (obj1 != null && !pickupCup.isPlaced)
             {
-                Debug.LogWarning("Cannot pour milk with a lid on!");
-                return;
+                Debug.Log("Pouring milk.");
+                MoveCarton();
+                StartPouring();
+                m_interactable = false;
+            }
+            else
+            {
+                Debug.LogWarning("No cup in hand.");
             }
         }
-
-        // Check if frothing is happening
-        if (FrotherInteractable.IsFrothing)
+        cupManager = interactionController.GetComponent<CupManager>();
+        if (cupManager.cupContents.Contains("lid"))
         {
-            Debug.LogWarning("Cannot make coffee while frothing!");
+            Debug.LogWarning("Cannot pour milk with a lid on!");
             return;
-        }
-
-        GameObject access = CupInteractable.curr;
-
-        if (access != null)
-        {
-            Debug.Log("Pouring milk.");
-            MoveCarton();
-            StartPouring();
-            m_interactable = false;
         }
         else
         {

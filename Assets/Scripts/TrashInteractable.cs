@@ -1,5 +1,6 @@
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TrashInteractable : MonoBehaviour, IInteractable
 {
@@ -18,13 +19,29 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public PickupCup pickupCup;
     public void Interact(InteractionController interactionController)
     {
-        Debug.Log("Interacted with " + gameObject.name);
-        AudioSource trashSound = gameObject.GetComponent<AudioSource>();
-        trashSound.time = 1.4f;
-        trashSound.Play();
-        ResetAll();
-        GameObject cup = CupInteractable.curr;
-        Destroy(cup);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        if (obj != null)
+        {
+            pickupCup = obj.GetComponent<PickupCup>();
+            Debug.Log("Interacted with " + gameObject.name);
+            GameObject cup = CupInteractable.curr;
+            if (cup != null && !pickupCup.isPlaced)
+            {
+                AudioSource trashSound = gameObject.GetComponent<AudioSource>();
+                trashSound.time = 1.4f;
+                trashSound.Play();
+                ResetAll();
+                Destroy(cup);
+            }
+            else
+            {
+                Debug.LogWarning("No trash in hand.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No trash in hand.");
+        }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -14,7 +14,6 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
-    [SerializeField] public bool isPlaced = false;
 
     public ParticleSystem CoffeeStream;
     public float hSliderValue = 0.0F;
@@ -33,36 +32,29 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
-
-        cupManager = interactionController.GetComponent<CupManager>();
-        // Check if frothing is happening
-        if (FrotherInteractable.IsFrothing)
+        if (obj != null)
         {
-            Debug.LogWarning("Cannot make coffee while frothing!");
-            return;
-        }
-        if (CoffeeIsDone)
-        {
-            Debug.Log("Coffee is already done!");
-            return;
-        }
+            pickupCup = obj.GetComponent<PickupCup>();
 
-        if (cupManager.cupContents.Contains("lid"))
-        {
-            Debug.LogWarning("Cannot make coffee with a lid on!");
-            return;
-        }
+            cupManager = interactionController.GetComponent<CupManager>();
 
-        GameObject access = CupInteractable.curr;
+            if (cupManager.cupContents.Contains("lid"))
+            {
+                Debug.LogWarning("Cannot make coffee with a lid on!");
+                return;
+            }
 
-        if (access != null && !isPlaced)
-        {
-            isPlaced = true;
-            Debug.Log("Cup placed: " + access.name);
-            StartPouring();
-            PlaceCup(access);
-            m_interactable = false;
+            GameObject access = CupInteractable.curr;
+
+            if (access != null && !pickupCup.isPlaced)
+            {
+                pickupCup.isPlaced = true;
+                Debug.Log("Cup placed: " + access.name);
+                StartPouring();
+                PlaceCup(access);
+                m_interactable = false;
+            }
+            
         }
         else
         {

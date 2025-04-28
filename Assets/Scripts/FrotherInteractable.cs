@@ -13,43 +13,43 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
     public CupManager cupManager; 
-    public bool isPlaced = false;
-    public static bool IsFrothing { get; private set; } = false;
     public void ResetFrotherState()
     {
-        isPlaced = false;
         m_interactable = true;
         Debug.Log("Frother state reset: " + m_interactable);
     }
     public void Interact(InteractionController interactionController)
     {
-        Debug.Log("Interacted with " + gameObject.name + ". MilkInCup: " + CoffeeInteractable.CoffeeIsDone);
+        Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
-
-        GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
-        cupManager = m_cup.GetComponent<CupManager>();
-        bool liquid = pickupCup.cupContents.Contains("milk") || pickupCup.cupContents.Contains("water") || pickupCup.cupContents.Contains("coffee");
-        if (!liquid)
+        if (obj != null)
         {
-            Debug.LogWarning("You must add liquid first before frothing!");
-            return;
-        }
-        if (pickupCup.cupContents.Contains("lid"))
-        {
-            Debug.LogWarning("Cannot make coffee with a lid on!");
-            return;
-        }
-        GameObject access = CupInteractable.curr;
+            pickupCup = obj.GetComponent<PickupCup>();
 
-        if (access != null && !isPlaced)
-        {
-            PlaceCup(access);
-            isPlaced = true;
+            GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
+            cupManager = m_cup.GetComponent<CupManager>();
+            bool liquid = pickupCup.cupContents.Contains("milk") || pickupCup.cupContents.Contains("water") || pickupCup.cupContents.Contains("coffee");
+            if (!liquid)
+            {
+                Debug.LogWarning("You must add liquid first before frothing!");
+                return;
+            }
+            if (pickupCup.cupContents.Contains("lid"))
+            {
+                Debug.LogWarning("Cannot make coffee with a lid on!");
+                return;
+            }
+            GameObject access = CupInteractable.curr;
 
-            Debug.Log("Cup placed: " + access.name);
-            StartFrothing();
-            m_interactable = false;
+            if (access != null && !pickupCup.isPlaced)
+            {
+                PlaceCup(access);
+                pickupCup.isPlaced = true;
+
+                Debug.Log("Cup placed: " + access.name);
+                StartFrothing();
+                m_interactable = false;
+            }
         }
         else
         {
@@ -97,12 +97,10 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         pickupCup.coffeeDone = true;
         pickupCup.CompleteFrothing();
         pickupCup.AddContent("frother");
-        IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }
     public void StartFrothing()
     {
-        IsFrothing = true;
         Debug.Log("Frothing.");
         AudioSource frothSound = GetComponent<AudioSource>();
         frothSound.Play();

@@ -12,6 +12,7 @@ public class PickupCup : MonoBehaviour, IInteractable
     private bool coffeePickupReady = false;
     private bool frothingComplete = false;
     public bool isHotCoffee = false; // Track if coffee is hot (frothed) or cold
+    public bool isPlaced = false;
 
     // Check both conditions for interactability
     public bool IsInteractable => m_interactable && (coffeePickupReady || frothingComplete);
@@ -49,15 +50,7 @@ public class PickupCup : MonoBehaviour, IInteractable
             // If we're picking up from the coffee machine
             if (coffeePickupReady && !frothingComplete)
             {
-                GameObject obj = GameObject.FindGameObjectWithTag("CoffeeMachine");
-                if (obj != null)
-                {
-                    coffeeInteractable = obj.GetComponent<CoffeeInteractable>();
-                    if (coffeeInteractable != null)
-                    {
-                        coffeeInteractable.isPlaced = false;
-                    }
-                }
+                isPlaced = false;
                 // Coffee is cold by default if not frothed
                 isHotCoffee = false;
                 readyToServe = true;
@@ -123,7 +116,7 @@ public class PickupCup : MonoBehaviour, IInteractable
         cup.transform.rotation = handTransform.rotation;
         cup.transform.localPosition = Vector3.zero;
         cup.transform.localRotation = Quaternion.identity;
-
+        isPlaced = false;
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb)
         {

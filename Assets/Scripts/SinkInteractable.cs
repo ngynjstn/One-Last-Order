@@ -14,7 +14,6 @@ public class SinkInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
-    [SerializeField] public bool isPlaced = false;
     public static bool IsPouringWater { get; private set; } = false;
     public void ResetSinkState()
     {
@@ -26,30 +25,30 @@ public class SinkInteractable : MonoBehaviour, IInteractable
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
-        //GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
-        //cupManager = obj1.GetComponent<CupManager>();
-        cupManager = interactionController.GetComponent<CupManager>();
-        // Check if frothing is happening
-        if (FrotherInteractable.IsFrothing)
+        if (obj != null)
         {
-            Debug.LogWarning("Cannot make coffee while frothing!");
-            return;
-        }
-        if (cupManager.cupContents.Contains("lid"))
-        {
-            Debug.LogWarning("Cannot use sink with a lid on!");
-            return;
-        }
-        GameObject access = CupInteractable.curr;
+            pickupCup = obj.GetComponent<PickupCup>();
+            cupManager = interactionController.GetComponent<CupManager>();
+            
+            if (cupManager.cupContents.Contains("lid"))
+            {
+                Debug.LogWarning("Cannot use sink with a lid on!");
+                return;
+            }
+            GameObject access = CupInteractable.curr;
 
-        if (access != null && !isPlaced)
-        {
-            isPlaced = true;
-            Debug.Log("Cup placed: " + access.name);
-            StartPouring();
-            PlaceCup(access);
-            m_interactable = false;
+            if (access != null && !pickupCup.isPlaced)
+            {
+                pickupCup.isPlaced = true;
+                Debug.Log("Cup placed: " + access.name);
+                StartPouring();
+                PlaceCup(access);
+                m_interactable = false;
+            }
+            else
+            {
+                Debug.LogWarning("No cup to place or cup already placed.");
+            }
         }
         else
         {
@@ -99,7 +98,6 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         pickupCup.EnableCoffeePickup();
         pickupCup.AddContent("water");
         IsPouringWater = false;
-        isPlaced = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }
     public void StartPouring()
