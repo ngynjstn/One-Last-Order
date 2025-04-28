@@ -27,8 +27,9 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
-        GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
-        cupManager = obj1.GetComponent<CupManager>();
+        //GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
+        //cupManager = obj1.GetComponent<CupManager>();
+        cupManager = interactionController.GetComponent<CupManager>();
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
         {
@@ -98,6 +99,7 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         pickupCup.EnableCoffeePickup();
         pickupCup.AddContent("water");
         IsPouringWater = false;
+        isPlaced = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }
     public void StartPouring()
