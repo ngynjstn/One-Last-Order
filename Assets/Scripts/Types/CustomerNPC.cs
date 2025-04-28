@@ -92,18 +92,22 @@ public class CustomerNPC : MonoBehaviour, IInteractable
         yield return null;
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         if (!TalkedToCustomerOnce)
         {
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        cupManager = player.GetComponent<CupManager>();
+
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        cupManager = interactionController.GetComponent<CupManager>();
         GameObject trash = GameObject.FindGameObjectWithTag("Trash");
         trashInteractable = trash.GetComponent<TrashInteractable>();
         List<string> drink = cupManager.cupContents;
+
+
+
 
         if (drink.Contains("coffee") && drink.Contains("frother"))
         {

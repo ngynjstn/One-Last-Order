@@ -60,7 +60,7 @@ public class InteractionController : MonoBehaviour
             interactable.IsInteractable &&
             m_playerInput.actions["Interact"].triggered)
         {
-            interactable.Interact();
+            interactable.Interact(this);
         }
     }
 

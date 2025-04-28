@@ -21,7 +21,7 @@ public class MilkInteractable : MonoBehaviour, IInteractable
         Debug.Log("Milk state reset to: " + m_interactable);
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Player");

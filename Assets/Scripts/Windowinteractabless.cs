@@ -42,7 +42,7 @@ public class WindowInteractable : MonoBehaviour, IInteractable
         UpdateWindowAppearance();
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         // Prevent interaction if already interacting or fade is in use
         if (isInteracting || isFadeInUse)

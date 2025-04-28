@@ -31,7 +31,7 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         StartCoroutine(LeaveRoomSequence());
     }

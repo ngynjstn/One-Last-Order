@@ -112,7 +112,7 @@ public class TVInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         ConversationManager.Instance.StartConversation(dialogueObject);
     }

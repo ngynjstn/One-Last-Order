@@ -43,7 +43,7 @@ public class DumpsterInteractable : MonoBehaviour, IInteractable
     }
 
     // Implementing the Interact method from IInteractable interface
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         //if (!hasChangedClothes)
         //{

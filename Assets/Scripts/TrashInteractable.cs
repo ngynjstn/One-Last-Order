@@ -16,7 +16,7 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public LidInteractable lidInteractable;
     public MilkInteractable milkInteractable;
     public CupManager cupManager;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         AudioSource trashSound = gameObject.GetComponent<AudioSource>();

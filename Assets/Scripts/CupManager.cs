@@ -19,7 +19,6 @@ public class CupManager : MonoBehaviour
     {
 
     }
-    public PickupCup pickupCup = null;
     // Update is called once per frame
     void Update()
     {

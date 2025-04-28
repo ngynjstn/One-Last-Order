@@ -14,7 +14,7 @@ public class IceFridgeInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject cup;
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
 

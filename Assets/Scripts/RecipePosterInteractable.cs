@@ -10,7 +10,7 @@ public class RecipePosterInteractable : MonoBehaviour, IInteractable
     public bool IsInteractable => m_interactable;
 
     public NPCConversation m_conversation;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         ConversationManager.Instance.StartConversation(m_conversation);
         m_interactable = false;

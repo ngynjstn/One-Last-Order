@@ -21,7 +21,7 @@ public class PickupCup : MonoBehaviour, IInteractable
     public bool coffeeDone = false;
     public bool readyToServe = false; // Coffee is ready to be served
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Attempting to pick up cup from machine.");
 

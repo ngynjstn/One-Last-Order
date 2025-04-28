@@ -12,7 +12,7 @@ public class OutsideDoorInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Animator doorAnimator;
     public bool IsInteractable => m_interactable;
     private bool doorOpen = false;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         doorOpen = !doorOpen;

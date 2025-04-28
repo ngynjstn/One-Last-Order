@@ -21,7 +21,7 @@ public class CupInteractable : MonoBehaviour, IInteractable
         m_interactable = true;
         Debug.Log("Cup dispenser reset and ready to dispense a new cup");
     }
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
 

@@ -21,7 +21,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         m_interactable = true;
         Debug.Log("Frother state reset: " + m_interactable);
     }
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name + ". MilkInCup: " + CoffeeInteractable.CoffeeIsDone);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");

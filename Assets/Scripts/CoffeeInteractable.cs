@@ -29,7 +29,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         Debug.Log("Coffee state reset to: " + CoffeeIsDone);
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
