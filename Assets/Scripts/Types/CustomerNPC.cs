@@ -31,6 +31,12 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public CupManager cupManager;
     public CupInteractable cupInteractable;
     public TrashInteractable trashInteractable;
+
+    public bool latte = false;
+    public bool coffee = false;
+    public bool icedCoffee = false;
+
+
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
