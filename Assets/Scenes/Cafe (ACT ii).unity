@@ -13321,8 +13321,8 @@ GameObject:
   - component: {fileID: 822702985}
   - component: {fileID: 822702984}
   - component: {fileID: 822702983}
-  - component: {fileID: 822702982}
   - component: {fileID: 822702986}
+  - component: {fileID: 822702987}
   m_Layer: 0
   m_Name: Tumbler.002 (3)
   m_TagString: Untagged
@@ -13330,28 +13330,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!64 &822702982
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822702981}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2408830296763884056, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
 --- !u!23 &822702983
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13432,11 +13410,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8460d312d3420e43acbc0328ef5310c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactableHintText: Press E to interact
+  m_interactableHintText: Press E to put on a lid
   m_interactable: 1
   pickupCup: {fileID: 0}
   mesh: {fileID: 0}
   cupManager: {fileID: 0}
+--- !u!65 &822702987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822702981}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.032821145, y: 0.039194863, z: 0.022604963}
+  m_Center: {x: -0.0069920537, y: 0.010892932, z: -0.0024736626}
 --- !u!64 &826263305
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25428,7 +25427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c1c49558860aa4fbfe74c1e7842733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_interactableHintText: Press E to interact
+  m_interactableHintText: Press E to grab a cup
   m_interactable: 1
   cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
   handTransform: {fileID: 342729727}
@@ -31472,7 +31471,6 @@ GameObject:
   - component: {fileID: 1730614816}
   - component: {fileID: 1730614815}
   - component: {fileID: 1730614814}
-  - component: {fileID: 1730614817}
   m_Layer: 0
   m_Name: Tumbler.004 (11)
   m_TagString: CupSpawner
@@ -31570,24 +31568,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730614812}
   m_Mesh: {fileID: -3181587875085124830, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
---- !u!114 &1730614817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730614812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c1c49558860aa4fbfe74c1e7842733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_interactableHintText: Press E to grab cup
-  m_interactable: 1
-  cup: {fileID: 1410970914048076864, guid: ef05b909a8250d74681ff00c4d98ca9b, type: 3}
-  handTransform: {fileID: 342729727}
-  currentCup: {fileID: 0}
-  playerCameraTransform: {fileID: 225870965}
 --- !u!64 &1731676214
 MeshCollider:
   m_ObjectHideFlags: 0
