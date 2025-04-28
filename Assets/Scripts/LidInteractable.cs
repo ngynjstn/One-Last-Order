@@ -52,7 +52,7 @@ public class LidInteractable : MonoBehaviour, IInteractable
                 lidTransform.gameObject.SetActive(true);
                 mesh = obj.GetComponent<MeshRenderer>();
                 mesh.enabled = false;
-                cupManager.AddContent("lid");
+                pickupCup.AddContent("lid");
                 Debug.Log("Lid activated!");
                 Debug.Log(string.Join(", ", cupManager.cupContents));
             }

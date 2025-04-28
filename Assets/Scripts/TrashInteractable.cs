@@ -15,7 +15,7 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public SinkInteractable sinkInteractable;
     public LidInteractable lidInteractable;
     public MilkInteractable milkInteractable;
-    public CupManager cupManager;
+    public PickupCup pickupCup;
     public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -40,12 +40,14 @@ public class TrashInteractable : MonoBehaviour, IInteractable
 
     public void ResetAll()
     {
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
         cupInteractable.ResetCupInteractable();
         coffeeInteractable.ResetCoffeeState();
         frotherInteractable.ResetFrotherState();
         lidInteractable.ResetInteractable();
         sinkInteractable.ResetSinkState();
         milkInteractable.ResetMilkState();
-        cupManager.ClearContent();
+        pickupCup.ClearContent();
     }
 }

@@ -29,6 +29,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public bool m_isInteractable = true;
 
     public CupManager cupManager;
+    public PickupCup pickupCup;
     public CupInteractable cupInteractable;
     public TrashInteractable trashInteractable;
 
@@ -102,6 +103,8 @@ public class CustomerNPC : MonoBehaviour, IInteractable
 
         //GameObject player = GameObject.FindGameObjectWithTag("Player");
         cupManager = interactionController.GetComponent<CupManager>();
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
         GameObject trash = GameObject.FindGameObjectWithTag("Trash");
         trashInteractable = trash.GetComponent<TrashInteractable>();
         List<string> drink = cupManager.cupContents;
@@ -116,7 +119,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             trashInteractable.ResetAll();
             GameObject cup = CupInteractable.curr;
             Destroy(cup);
-            cupManager.ClearContent();
+            pickupCup.ClearContent();
             CompleteInteraction();
         }
 

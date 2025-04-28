@@ -15,6 +15,7 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     public CupManager cupManager;
     Vector3 originalPos;
     Quaternion originalRot;
+    public PickupCup pickupCup;
     public void ResetMilkState()
     {
         m_interactable = true;
@@ -74,7 +75,9 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     private IEnumerator EnablePickupAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        cupManager.AddContent("milk");
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        pickupCup.AddContent("milk");
         carton.transform.SetParent(null);
         carton.transform.position = originalPos;
         carton.transform.rotation = originalRot;

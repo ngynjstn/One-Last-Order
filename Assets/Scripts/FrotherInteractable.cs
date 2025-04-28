@@ -29,13 +29,13 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
 
         GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
         cupManager = m_cup.GetComponent<CupManager>();
-        bool liquid = cupManager.cupContents.Contains("milk") || cupManager.cupContents.Contains("water") || cupManager.cupContents.Contains("coffee");
+        bool liquid = pickupCup.cupContents.Contains("milk") || pickupCup.cupContents.Contains("water") || pickupCup.cupContents.Contains("coffee");
         if (!liquid)
         {
             Debug.LogWarning("You must add liquid first before frothing!");
             return;
         }
-        if (cupManager.cupContents.Contains("lid"))
+        if (pickupCup.cupContents.Contains("lid"))
         {
             Debug.LogWarning("Cannot make coffee with a lid on!");
             return;
@@ -96,7 +96,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         cupManager = obj1.GetComponent<CupManager>();
         pickupCup.coffeeDone = true;
         pickupCup.CompleteFrothing();
-        cupManager.AddContent("frother");
+        pickupCup.AddContent("frother");
         IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }

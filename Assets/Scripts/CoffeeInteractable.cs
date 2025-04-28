@@ -104,7 +104,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(delay);
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
-        cupManager.AddContent("coffee");
+        pickupCup.AddContent("coffee");
         CoffeeIsDone = true;
         IsMakingCoffee = false;
         Debug.Log("Coffee is done. Ready to serve or add ice.");
