@@ -1143,6 +1143,8 @@ MonoBehaviour:
   isWindowOpen: 1
   fadeAnimator: {fileID: 3691540748312352669}
   dialogueObject: {fileID: 1713314997}
+  audioSource: {fileID: 0}
+  interactionSound: {fileID: 0}
 --- !u!1 &159920528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3635918528543191712, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
@@ -7399,7 +7401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a890fb6cdc6fe7b47a4bebb0a20df8a0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: a890fb6cdc6fe7b47a4bebb0a20df8a0, type: 3}
       propertyPath: m_Controller
@@ -13002,7 +13004,7 @@ MonoBehaviour:
   fadeAnimator: {fileID: 3691540748312352669}
   fadeCanvasGroup: {fileID: 1710804077}
   demoCanvasPanel: {fileID: 2037286357}
-  jumpscareObject: {fileID: 460624593}
+  jumpscareObject: {fileID: 530063817}
   mainCamera: {fileID: 1718214706}
   bedCamera: {fileID: 1978465884}
   scareSound: {fileID: 2081275892}
