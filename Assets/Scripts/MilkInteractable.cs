@@ -12,7 +12,7 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     [SerializeField] private bool m_interactable = true;
     public bool IsInteractable => m_interactable;
     [SerializeField] private Transform handTransform;
-    public PickupCup pickupCup;
+    public CupManager cupManager;
     Vector3 originalPos;
     Quaternion originalRot;
     public void ResetMilkState()
@@ -24,11 +24,11 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        GameObject obj = GameObject.FindGameObjectWithTag("Player");
         if (obj != null)
         {
-            pickupCup = obj.GetComponent<PickupCup>();
-            if (pickupCup.cupContents.Contains("lid"))
+            cupManager = obj.GetComponent<CupManager>();
+            if (cupManager.cupContents.Contains("lid"))
             {
                 Debug.LogWarning("Cannot pour milk with a lid on!");
                 return;
@@ -74,9 +74,7 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     private IEnumerator EnablePickupAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        pickupCup.coffeeDone = true;
-        pickupCup.EnableCoffeePickup();
-        pickupCup.AddContent("milk");
+        cupManager.AddContent("milk");
         carton.transform.SetParent(null);
         carton.transform.position = originalPos;
         carton.transform.rotation = originalRot;

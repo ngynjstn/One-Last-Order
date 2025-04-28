@@ -40,13 +40,13 @@ public class IceFridgeInteractable : MonoBehaviour, IInteractable
     {
 
     }
-    public PickupCup pickupCup;
+    public CupManager cupManager;
     public void StartPouring()
     {
         AudioSource iceSound = GetComponent<AudioSource>();
         iceSound.Play();
-        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
-        pickupCup.AddContent("ice");
+        GameObject obj = GameObject.FindGameObjectWithTag("Player");
+        cupManager = obj.GetComponent<CupManager>();
+        cupManager.AddContent("ice");
     }
 }

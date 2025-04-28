@@ -21,18 +21,21 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         m_interactable = true;
         Debug.Log("Sink state reset to: " + true);
     }
+    public CupManager cupManager;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
+        GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
+        cupManager = obj1.GetComponent<CupManager>();
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
         {
             Debug.LogWarning("Cannot make coffee while frothing!");
             return;
         }
-        if (pickupCup.cupContents.Contains("lid"))
+        if (cupManager.cupContents.Contains("lid"))
         {
             Debug.LogWarning("Cannot use sink with a lid on!");
             return;
@@ -89,9 +92,11 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(delay);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
+        GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
+        cupManager = obj1.GetComponent<CupManager>();
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
-        pickupCup.AddContent("water");
+        cupManager.AddContent("water");
         IsPouringWater = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }

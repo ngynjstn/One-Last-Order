@@ -34,11 +34,14 @@ public class LidInteractable : MonoBehaviour, IInteractable
     }
     public PickupCup pickupCup;
     public MeshRenderer mesh;
+    public CupManager cupManager;
     private void AddLid()
     {
         GameObject access = CupInteractable.curr;
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
+        GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
+        cupManager = obj1.GetComponent<CupManager>();
         if (access != null)
         {
             // Find the child named "Lid" inside the current cup
@@ -49,9 +52,9 @@ public class LidInteractable : MonoBehaviour, IInteractable
                 lidTransform.gameObject.SetActive(true);
                 mesh = obj.GetComponent<MeshRenderer>();
                 mesh.enabled = false;
-                pickupCup.AddContent("lid");
+                cupManager.AddContent("lid");
                 Debug.Log("Lid activated!");
-                Debug.Log(string.Join(", ", pickupCup.cupContents));
+                Debug.Log(string.Join(", ", cupManager.cupContents));
             }
             else
             {

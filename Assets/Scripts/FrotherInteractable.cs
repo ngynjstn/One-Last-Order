@@ -12,6 +12,7 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
+    public CupManager cupManager; 
     public bool isPlaced = false;
     public static bool IsFrothing { get; private set; } = false;
     public void ResetFrotherState()
@@ -25,12 +26,16 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         Debug.Log("Interacted with " + gameObject.name + ". MilkInCup: " + CoffeeInteractable.CoffeeIsDone);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
-        if (!pickupCup.cupContents.Contains("milk"))
+
+        GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
+        cupManager = m_cup.GetComponent<CupManager>();
+        bool liquid = cupManager.cupContents.Contains("milk") || cupManager.cupContents.Contains("water") || cupManager.cupContents.Contains("coffee");
+        if (!liquid)
         {
-            Debug.LogWarning("You must pour milk first before frothing!");
+            Debug.LogWarning("You must add liquid first before frothing!");
             return;
         }
-        if (pickupCup.cupContents.Contains("lid"))
+        if (cupManager.cupContents.Contains("lid"))
         {
             Debug.LogWarning("Cannot make coffee with a lid on!");
             return;
@@ -87,9 +92,11 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(delay);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
+        GameObject obj1 = GameObject.FindGameObjectWithTag("Player");
+        cupManager = obj1.GetComponent<CupManager>();
         pickupCup.coffeeDone = true;
         pickupCup.CompleteFrothing();
-        pickupCup.AddContent("frother");
+        cupManager.AddContent("frother");
         IsFrothing = false;
         Debug.Log("Pickup is now interactable.");
     }

@@ -19,6 +19,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     public ParticleSystem CoffeeStream;
     public float hSliderValue = 0.0F;
     public PickupCup pickupCup;
+    public CupManager cupManager;
     public static bool IsMakingCoffee { get; private set; } = false;
     public static bool CoffeeIsDone { get; private set; } = false;
     public void ResetCoffeeState()
@@ -34,6 +35,8 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
 
+        GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
+        cupManager = m_cup.GetComponent<CupManager>();
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
         {
@@ -46,7 +49,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
             return;
         }
 
-        if (pickupCup.cupContents.Contains("lid"))
+        if (cupManager.cupContents.Contains("lid"))
         {
             Debug.LogWarning("Cannot make coffee with a lid on!");
             return;
@@ -101,7 +104,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(delay);
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
-        pickupCup.AddContent("coffee");
+        cupManager.AddContent("coffee");
         CoffeeIsDone = true;
         IsMakingCoffee = false;
         Debug.Log("Coffee is done. Ready to serve or add ice.");

@@ -106,6 +106,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             trashInteractable.ResetAll();
             GameObject cup = CupInteractable.curr;
             Destroy(cup);
+            cupManager.ClearContent();
             CompleteInteraction();
         }
 

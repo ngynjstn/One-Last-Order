@@ -15,6 +15,7 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public SinkInteractable sinkInteractable;
     public LidInteractable lidInteractable;
     public MilkInteractable milkInteractable;
+    public CupManager cupManager;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
@@ -45,5 +46,6 @@ public class TrashInteractable : MonoBehaviour, IInteractable
         lidInteractable.ResetInteractable();
         sinkInteractable.ResetSinkState();
         milkInteractable.ResetMilkState();
+        cupManager.ClearContent();
     }
 }

@@ -6504,7 +6504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8068073526183931155, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8063847077026466600, guid: 9dd7d8867ad81464a9ca410dfac0aedd, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -12878,7 +12878,7 @@ MonoBehaviour:
   NodeID: 3
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
-  Audio: {fileID: 8300000, guid: f1904fef18fb31748822870febd1c7e8, type: 3}
+  Audio: {fileID: 8300000, guid: 0bc44f51402db4944adaba7469d7adf7, type: 3}
 --- !u!114 &788537814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13436,6 +13436,7 @@ MonoBehaviour:
   m_interactable: 1
   pickupCup: {fileID: 0}
   mesh: {fileID: 0}
+  cupManager: {fileID: 0}
 --- !u!64 &826263305
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13979,7 +13980,7 @@ MonoBehaviour:
   m_interactableHintText: Press E to interact
   m_interactable: 1
   handTransform: {fileID: 1757766904}
-  pickupCup: {fileID: 0}
+  cupManager: {fileID: 0}
 --- !u!82 &861139508
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22370,6 +22371,7 @@ MonoBehaviour:
   sinkInteractable: {fileID: 8936300996785906489}
   lidInteractable: {fileID: 822702986}
   milkInteractable: {fileID: 861139507}
+  cupManager: {fileID: 1541748988}
 --- !u!23 &1154335734
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31081,9 +31083,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 5
-  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":50.3333435,"yPos":213.000031},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"Yes","parentUIDs":[0],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":281.666718,"yPos":218.333344},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"No","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":138,"yPos":82},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
-    you want to take out the trash?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":null,"OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":43,"yPos":318.6667},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"HUUHHHH!!
-    God it''s so heavy","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"You","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":45.66664,"yPos":443.3334},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright,
+  json: '{"Options":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":false,"xPos":48.3333435,"yPos":167.000031},"ID":1,"ParamActions":[],"TMPFontGUID":null,"Text":"Yes","parentUIDs":[0],"SpeechUID":-1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":279.666718,"yPos":172.333344},"ID":2,"ParamActions":[],"TMPFontGUID":null,"Text":"No","parentUIDs":[0],"SpeechUID":-1}],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":1},{"__type":"EditableOptionConnection:#DialogueEditor","Conditions":[],"NodeUID":2}],"EditorInfo":{"isRoot":true,"xPos":136,"yPos":36},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Do
+    you want to take out the trash?","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":null,"OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":4}],"EditorInfo":{"isRoot":false,"xPos":41,"yPos":272.6667},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"HUUHHHH!!
+    God it''s so heavy","parentUIDs":[1],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"You","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":1},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":43.66664,"yPos":397.3334},"ID":4,"ParamActions":[],"TMPFontGUID":null,"Text":"Alright,
     finally! Time to hit the road. Just gotta lock up the front and flip off that
     open sign. Freedom!","parentUIDs":[3],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
@@ -39509,6 +39511,7 @@ MonoBehaviour:
   placeHolder: {fileID: 324370545}
   cup: {fileID: 0}
   isPlaced: 0
+  cupManager: {fileID: 0}
   WaterStream: {fileID: 977314548}
   hSliderValue: 1
   pickupCup: {fileID: 0}
