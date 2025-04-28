@@ -1136,6 +1136,105 @@ MonoBehaviour:
   isWindowOpen: 1
   fadeAnimator: {fileID: 476276381}
   dialogueObject: {fileID: 926216997}
+  audioSource: {fileID: 155431567}
+  interactionSound: {fileID: 8300000, guid: 41a7e56246417d84dab44e2df1e5fa78, type: 3}
+--- !u!82 &155431567
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155431556}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &159920528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3635918528543191712, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
@@ -7026,7 +7125,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.185
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8274,6 +8373,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 71d769f7adb9fb54fbc9c9a4fea340ed, type: 2}
     - target: {fileID: 3906527860592617244, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906527860592617244, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8886,6 +8989,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2372653819247342070, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
       insertIndex: -1
       addedObject: {fileID: 155431564}
+    - targetCorrespondingSourceObject: {fileID: 2372653819247342070, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 155431567}
     - targetCorrespondingSourceObject: {fileID: 1312162382953862931, guid: a3e915fdd4f5ec64db3c404e08e20827, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2032249693}
@@ -13062,6 +13168,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.596
       objectReference: {fileID: 0}
+    - target: {fileID: 710075836920301234, guid: 92051cbd2f68bc14bad6d5deabfd1bfa, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9f941ffe9e1434d92025130616f84a, type: 3}
+    - target: {fileID: 710075836920301234, guid: 92051cbd2f68bc14bad6d5deabfd1bfa, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9f941ffe9e1434d92025130616f84a, type: 3}
     - target: {fileID: 5034393123944484073, guid: 92051cbd2f68bc14bad6d5deabfd1bfa, type: 3}
       propertyPath: dialogueLines.Array.size
       value: 6

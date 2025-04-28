@@ -26,6 +26,10 @@ public class WindowInteractable : MonoBehaviour, IInteractable
     [Header("Dialogue")]
     [SerializeField] private NPCConversation dialogueObject;
 
+    // New fields for sound
+    [SerializeField] private AudioSource audioSource;  // AudioSource to play sound
+    [SerializeField] private AudioClip interactionSound;  // Sound to play on interaction
+
     public static bool isFadeInUse = false;
     private bool isInteracting = false;
 
@@ -53,7 +57,21 @@ public class WindowInteractable : MonoBehaviour, IInteractable
 
         StartCoroutine(ToggleWindowSequence());
 
+        PlayInteractionSound();
+
         //ConversationManager.Instance.StartConversation(dialogueObject);
+    }
+
+    private void PlayInteractionSound()
+    {
+        if (audioSource != null && interactionSound != null)
+        {
+            audioSource.PlayOneShot(interactionSound);
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or Interaction Sound is not assigned!");
+        }
     }
     public void ActivateWindow()
     {
