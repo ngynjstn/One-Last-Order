@@ -70,6 +70,11 @@ public class DresserInteractable : MonoBehaviour, IInteractable
         //yield return StartCoroutine(FadeTo(1f));
         fadeAnimator.SetTrigger("Fade_Out");
 
+        // 7. Clear the interaction hint text to hide the prompt
+        // This is the same approach used in TVInteractable
+        m_interactableHintText = "";
+        m_interactable = false; // Disable interaction to prevent multiple triggers
+        
         // 2. Short pause while black
         yield return new WaitForSeconds(2f);
 
