@@ -56,7 +56,7 @@ public class LightToggleInteractable : MonoBehaviour, IInteractable
     }
 
     // Implementing the Interact method from IInteractable interface
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         // Start the conversation with the NPC.  This part remains as is.
         //ConversationManager.Instance.StartConversation(dialogueObject);

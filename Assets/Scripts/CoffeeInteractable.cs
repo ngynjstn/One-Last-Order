@@ -29,7 +29,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         Debug.Log("Coffee state reset to: " + CoffeeIsDone);
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
@@ -104,7 +104,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(delay);
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
-        cupManager.AddContent("coffee");
+        pickupCup.AddContent("coffee");
         CoffeeIsDone = true;
         IsMakingCoffee = false;
         Debug.Log("Coffee is done. Ready to serve or add ice.");

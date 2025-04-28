@@ -15,7 +15,7 @@ public class LidInteractable : MonoBehaviour, IInteractable
         m_interactable = true;
         Debug.Log("Cup dispenser reset and ready to dispense a new cup");
     }
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject access = CupInteractable.curr;
@@ -52,7 +52,7 @@ public class LidInteractable : MonoBehaviour, IInteractable
                 lidTransform.gameObject.SetActive(true);
                 mesh = obj.GetComponent<MeshRenderer>();
                 mesh.enabled = false;
-                cupManager.AddContent("lid");
+                pickupCup.AddContent("lid");
                 Debug.Log("Lid activated!");
                 Debug.Log(string.Join(", ", cupManager.cupContents));
             }

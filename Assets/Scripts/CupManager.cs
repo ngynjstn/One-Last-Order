@@ -5,7 +5,7 @@ public class CupManager : MonoBehaviour
 {
     [SerializeField] public List<string> cupContents = new List<string>();
 
-    public void AddContent(string content)
+    /*public void AddContent(string content)
     {
         cupContents.Add(content);
         Debug.Log($"Added {content} to cup.");
@@ -13,7 +13,7 @@ public class CupManager : MonoBehaviour
     public void ClearContent()
     {
         cupContents.Clear();
-    }
+    }*/
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +23,13 @@ public class CupManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        if (obj != null)
+        {
+            pickupCup = obj.GetComponent<PickupCup>();
+            cupContents = pickupCup.cupContents;
+        }
+
+
     }
 }

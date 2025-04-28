@@ -97,7 +97,7 @@ public class BedInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         if (WindowInteractable.isFadeInUse)
         {

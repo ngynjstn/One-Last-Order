@@ -4,6 +4,6 @@ namespace DefaultNamespace
     {
         public string InteractableHintText { get; }
         public bool IsInteractable { get; }
-        public void Interact();
+        public void Interact(InteractionController interactionController);
     }
 }

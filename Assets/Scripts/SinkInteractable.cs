@@ -22,7 +22,7 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         Debug.Log("Sink state reset to: " + true);
     }
     public CupManager cupManager;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
@@ -96,7 +96,7 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         cupManager = obj1.GetComponent<CupManager>();
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
-        cupManager.AddContent("water");
+        pickupCup.AddContent("water");
         IsPouringWater = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }

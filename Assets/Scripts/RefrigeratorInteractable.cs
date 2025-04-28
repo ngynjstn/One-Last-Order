@@ -12,7 +12,7 @@ public class RefrigeratorInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Animator fridgeAnimator;
     public bool IsInteractable => m_interactable;
     private bool fridgeOpen = false;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
         fridgeOpen = !fridgeOpen;

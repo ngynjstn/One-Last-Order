@@ -9,7 +9,7 @@ public class BasicInteractable : MonoBehaviour, IInteractable
     // Disable m_interactable thru ur script if you want things to be like, one use button type shi
     [SerializeField] private bool m_interactable = true;
     public bool IsInteractable => m_interactable;
-    public void Interact()
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Interacted with " + gameObject.name);
     }

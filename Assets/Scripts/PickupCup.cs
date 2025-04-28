@@ -20,8 +20,17 @@ public class PickupCup : MonoBehaviour, IInteractable
     private CoffeeInteractable coffeeInteractable;
     public bool coffeeDone = false;
     public bool readyToServe = false; // Coffee is ready to be served
-
-    public void Interact()
+    [SerializeField] public List<string> cupContents = new List<string>();
+    public void AddContent(string content)
+    {
+        cupContents.Add(content);
+        Debug.Log($"Added {content} to cup.");
+    }
+    public void ClearContent()
+    {
+        cupContents.Clear();
+    }
+    public void Interact(InteractionController interactionController)
     {
         Debug.Log("Attempting to pick up cup from machine.");
 
