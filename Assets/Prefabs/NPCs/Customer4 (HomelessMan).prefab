@@ -59,6 +59,13 @@ MonoBehaviour:
   playerHasFinalDrink: 0
   reachedCounter: 0
   m_isInteractable: 1
+  cupManager: {fileID: 0}
+  pickupCup: {fileID: 0}
+  cupInteractable: {fileID: 0}
+  trashInteractable: {fileID: 0}
+  latte: 0
+  coffee: 0
+  icedCoffee: 0
 --- !u!136 &4987141154207053751
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -494,6 +501,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 4983209928904910363}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -532,6 +551,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -250034035575837570, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -250034035575837570, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -250034035575837570, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7f8c10a2cc1fc8f4b9bc754ac0f61a29, type: 3}
       propertyPath: m_Name

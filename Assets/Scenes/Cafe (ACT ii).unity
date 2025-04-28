@@ -11627,8 +11627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerPrefabs:
-  - {fileID: 7637211779826980811, guid: 6c4f305e2201e154aa2f801f9d29851a, type: 3}
-  - {fileID: 7637211779826980811, guid: 6c4f305e2201e154aa2f801f9d29851a, type: 3}
+  - {fileID: 5661016711016698177, guid: 0b3b62e0982da374fb927198e3168c8c, type: 3}
+  - {fileID: 5661016711016698177, guid: 0b3b62e0982da374fb927198e3168c8c, type: 3}
   spawnPoint: {fileID: 2109409399}
   counterPoint: {fileID: 1777916922}
   initialDelay: 2
@@ -28323,7 +28323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cupContents: []
-  m_cupInHand: {fileID: 0}
   pickupCup: {fileID: 0}
 --- !u!1 &1542350849
 GameObject:

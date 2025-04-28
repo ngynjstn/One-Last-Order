@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 8597618484456268137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -346,6 +346,13 @@ MonoBehaviour:
   playerHasFinalDrink: 0
   reachedCounter: 0
   m_isInteractable: 1
+  cupManager: {fileID: 0}
+  pickupCup: {fileID: 0}
+  cupInteractable: {fileID: 0}
+  trashInteractable: {fileID: 0}
+  latte: 0
+  coffee: 0
+  icedCoffee: 0
 --- !u!136 &3672007501126268115
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -449,12 +456,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 85751599840631980}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0aa88403477371e488bb6eb1551b2476, type: 3}
       propertyPath: m_LocalPosition.z
