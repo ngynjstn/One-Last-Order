@@ -15,6 +15,10 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeHolder;
     [SerializeField] private GameObject cup;
     [SerializeField] public bool isPlaced = false;
+
+    public ParticleSystem CoffeeStream;
+    public float hSliderValue = 0.0F;
+    public PickupCup pickupCup;
     public static bool IsMakingCoffee { get; private set; } = false;
     public static bool CoffeeIsDone { get; private set; } = false;
     public void ResetCoffeeState()
@@ -27,6 +31,8 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
 
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
@@ -39,6 +45,13 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
             Debug.Log("Coffee is already done!");
             return;
         }
+
+        if (pickupCup.cupContents.Contains("lid"))
+        {
+            Debug.LogWarning("Cannot make coffee with a lid on!");
+            return;
+        }
+
         GameObject access = CupInteractable.curr;
 
         if (access != null && !isPlaced)
@@ -83,14 +96,9 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
     {
 
     }
-    public ParticleSystem CoffeeStream;
-    public float hSliderValue = 0.0F;
-    public PickupCup pickupCup;
     private IEnumerator EnablePickupAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = obj.GetComponent<PickupCup>();
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
         pickupCup.AddContent("coffee");

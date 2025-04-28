@@ -22,17 +22,15 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public string playersCurrentDrink = "";
     public bool playerHasFinalDrink = false;
     public bool reachedCounter;
-    
 
     public string InteractableHintText => "Press E to Talk with Customer";
 
     public bool IsInteractable => m_isInteractable;
     public bool m_isInteractable = true;
 
-    public PickupCup pickupCup;
-    public CoffeeInteractable coffeeInteractable;
-    public FrotherInteractable frotherInteractable;
+    public CupManager cupManager;
     public CupInteractable cupInteractable;
+    public TrashInteractable trashInteractable;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -95,23 +93,18 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
-        GameObject cup = GameObject.FindGameObjectWithTag("Cup");
-        pickupCup = cup.GetComponent<PickupCup>();
-        GameObject coffeeMachine = GameObject.FindGameObjectWithTag("CoffeeMachine");
-        coffeeInteractable = coffeeMachine.GetComponent<CoffeeInteractable>();
-        GameObject frother = GameObject.FindGameObjectWithTag("Frother");
-        frotherInteractable = frother.GetComponent<FrotherInteractable>();
-        GameObject spawner = GameObject.FindGameObjectWithTag("CupSpawner");
-        cupInteractable = spawner.GetComponent<CupInteractable>();
-        List<string> drink = pickupCup.cupContents;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        cupManager = player.GetComponent<CupManager>();
+        GameObject trash = GameObject.FindGameObjectWithTag("Trash");
+        trashInteractable = trash.GetComponent<TrashInteractable>();
+        List<string> drink = cupManager.cupContents;
 
         if (drink.Contains("coffee") && drink.Contains("frother"))
         {
             playerHasFinalDrink = true;
             Debug.Log("Drink contains what's needed.");
-            cupInteractable.ResetCupInteractable();
-            coffeeInteractable.ResetCoffeeState();
-            frotherInteractable.ResetFrotherState();
+            trashInteractable.ResetAll();
+            GameObject cup = CupInteractable.curr;
             Destroy(cup);
             CompleteInteraction();
         }

@@ -13,6 +13,8 @@ TagManager:
   - Customer
   - Look
   - CupSpawner
+  - Carton
+  - Trash
   layers:
   - Default
   - TransparentFX

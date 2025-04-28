@@ -18,18 +18,23 @@ public class FrotherInteractable : MonoBehaviour, IInteractable
     {
         isPlaced = false;
         m_interactable = true;
-        Debug.Log("Frother state reset");
+        Debug.Log("Frother state reset: " + m_interactable);
     }
     public void Interact()
     {
-        Debug.Log("Interacted with " + gameObject.name + ". CoffeeIsDone: " + CoffeeInteractable.CoffeeIsDone);
-
-        if (!CoffeeInteractable.CoffeeIsDone)
+        Debug.Log("Interacted with " + gameObject.name + ". MilkInCup: " + CoffeeInteractable.CoffeeIsDone);
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
+        if (!pickupCup.cupContents.Contains("milk"))
         {
             Debug.LogWarning("You must pour milk first before frothing!");
             return;
         }
-
+        if (pickupCup.cupContents.Contains("lid"))
+        {
+            Debug.LogWarning("Cannot make coffee with a lid on!");
+            return;
+        }
         GameObject access = CupInteractable.curr;
 
         if (access != null && !isPlaced)

@@ -16,25 +16,25 @@ public class SinkInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject cup;
     [SerializeField] public bool isPlaced = false;
     public static bool IsPouringWater { get; private set; } = false;
-    public static bool WaterIsDone { get; private set; } = false;
-    public static void ResetCoffeeState()
+    public void ResetSinkState()
     {
-        WaterIsDone = false;
-        Debug.Log("Coffee state reset to: " + WaterIsDone);
+        m_interactable = true;
+        Debug.Log("Sink state reset to: " + true);
     }
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-
+        GameObject obj = GameObject.FindGameObjectWithTag("Cup");
+        pickupCup = obj.GetComponent<PickupCup>();
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
         {
             Debug.LogWarning("Cannot make coffee while frothing!");
             return;
         }
-        if (WaterIsDone)
+        if (pickupCup.cupContents.Contains("lid"))
         {
-            Debug.Log("Coffee is already done!");
+            Debug.LogWarning("Cannot use sink with a lid on!");
             return;
         }
         GameObject access = CupInteractable.curr;
@@ -92,7 +92,6 @@ public class SinkInteractable : MonoBehaviour, IInteractable
         pickupCup.coffeeDone = true;
         pickupCup.EnableCoffeePickup();
         pickupCup.AddContent("water");
-        WaterIsDone = true;
         IsPouringWater = false;
         Debug.Log("Coffee is done. Ready for pickup or frothing.");
     }

@@ -12,15 +12,16 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     public CoffeeInteractable coffeeInteractable;
     public FrotherInteractable frotherInteractable;
     public CupInteractable cupInteractable;
+    public SinkInteractable sinkInteractable;
+    public LidInteractable lidInteractable;
+    public MilkInteractable milkInteractable;
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
         AudioSource trashSound = gameObject.GetComponent<AudioSource>();
         trashSound.time = 1.4f;
         trashSound.Play();
-        cupInteractable.ResetCupInteractable();
-        coffeeInteractable.ResetCoffeeState();
-        frotherInteractable.ResetFrotherState();
+        ResetAll();
         GameObject cup = CupInteractable.curr;
         Destroy(cup);
     }
@@ -34,5 +35,15 @@ public class TrashInteractable : MonoBehaviour, IInteractable
     void Update()
     {
 
+    }
+
+    public void ResetAll()
+    {
+        cupInteractable.ResetCupInteractable();
+        coffeeInteractable.ResetCoffeeState();
+        frotherInteractable.ResetFrotherState();
+        lidInteractable.ResetInteractable();
+        sinkInteractable.ResetSinkState();
+        milkInteractable.ResetMilkState();
     }
 }
