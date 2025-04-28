@@ -137,7 +137,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1834266244016874982}
+        m_TargetAssemblyTypeName: CustomerNPC, Assembly-CSharp
+        m_MethodName: SetTalkedToCustomerOnce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   NodeID: 3
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
@@ -188,8 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 5
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":true,"xPos":158,"yPos":75},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Just
-    water...","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Customer","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":147,"yPos":203},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"No
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":3}],"EditorInfo":{"isRoot":true,"xPos":74,"yPos":70},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"Just
+    water...","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Customer","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":63,"yPos":198},"ID":3,"ParamActions":[],"TMPFontGUID":null,"Text":"No
     problem...","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"You","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
   DefaultName: 
@@ -202,7 +214,19 @@ MonoBehaviour:
   EndConversationFont: {fileID: 0}
   Event:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1834266244016874982}
+        m_TargetAssemblyTypeName: CustomerNPC, Assembly-CSharp
+        m_MethodName: SetTalkedToCustomerOnce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6194008978004953925
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,9 +290,7 @@ MonoBehaviour:
   pickupCup: {fileID: 0}
   cupInteractable: {fileID: 0}
   trashInteractable: {fileID: 0}
-  latte: 0
-  coffee: 0
-  icedCoffee: 0
+  m_customerDrinkWanted: 1
 --- !u!136 &7921505708716369219
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -350,7 +372,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6194008978004953925}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 6ebc7fefed701fd458035895fce47f34, type: 3}
+  m_Avatar: {fileID: 9000000, guid: d0f20ab760119fe45948108bb7b2b886, type: 3}
   m_Controller: {fileID: 9100000, guid: f1fcddba115ecc54faa584328c627e73, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

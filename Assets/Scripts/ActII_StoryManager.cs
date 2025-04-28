@@ -25,6 +25,8 @@ public class ActII_StoryManager : MonoBehaviour
     public NPCConversation beginningDialogue;
     public NPCConversation gotoCounterDialogue;
     public NPCConversation lookedAtRecipeSheetDialogue;
+    public NPCConversation antagonistDialogueTwo;
+    public NPCConversation exitStoreDialogue;
 
 
     [Header("Game objects necessary to subscribe to events")]
@@ -82,7 +84,9 @@ public class ActII_StoryManager : MonoBehaviour
             if (currentCustomer.TryGetComponent<CustomerNPC>(out var npc))
             {
                 npc.OnCustomerComplete -= HandleCustomerComplete;
+                npc.SetDestination(spawnPoint.position);
             }
+
             StartCoroutine(PrepareNextCustomer());
         }
     }
@@ -91,8 +95,26 @@ public class ActII_StoryManager : MonoBehaviour
     {
         customerInProgress = false;
         currentCustomerIndex++;
+        if (currentCustomerIndex >= 8)
+        {
+            yield return new WaitForSeconds(5f);
+            ConversationManager.Instance.StartConversation(exitStoreDialogue);
+            yield return 0;
+        }
 
         yield return new WaitForSeconds(timeBetweenCustomers);
         SpawnNextCustomer();
+    }
+
+
+    // ANTAGONIST SPECIFIC DIALOGUE
+    public void TriggerDialogueTwo()
+    {
+        StartCoroutine(AntagonistDialogueWait());
+    }
+    public IEnumerator AntagonistDialogueWait()
+    {
+        yield return new WaitForSeconds(8f);
+        ConversationManager.Instance.StartConversation(antagonistDialogueTwo);
     }
 }

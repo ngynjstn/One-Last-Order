@@ -6,6 +6,10 @@ using UnityEngine.Pool;
 using DefaultNamespace;
 using DialogueEditor;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
+
+
 
 public class CustomerNPC : MonoBehaviour, IInteractable
 {
@@ -33,9 +37,8 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     public CupInteractable cupInteractable;
     public TrashInteractable trashInteractable;
 
-    public bool latte = false;
-    public bool coffee = false;
-    public bool icedCoffee = false;
+    public CustomerDrinkWanted m_customerDrinkWanted;
+    //[SerializeField] public Transform exitPoint;
 
 
     protected virtual void Awake()
@@ -90,7 +93,8 @@ public class CustomerNPC : MonoBehaviour, IInteractable
     protected virtual IEnumerator ExitStore()
     {
         // Implementation for customer leaving the store
-        yield return null;
+        yield return new WaitForSeconds(5f);
+        Destroy(this.gameObject);
     }
 
     public void Interact(InteractionController interactionController)
@@ -100,7 +104,11 @@ public class CustomerNPC : MonoBehaviour, IInteractable
             ConversationManager.Instance.StartConversation(beginningDialogue);
             return;
         }
-
+        if (m_customerDrinkWanted == CustomerDrinkWanted.nothing)
+        {
+            CompleteInteraction();
+            return;
+        }
         //GameObject player = GameObject.FindGameObjectWithTag("Player");
         cupManager = interactionController.GetComponent<CupManager>();
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
@@ -112,7 +120,7 @@ public class CustomerNPC : MonoBehaviour, IInteractable
 
 
 
-        if (drink.Contains("coffee") && drink.Contains("frother"))
+        if (cupManager.ResolveCupContents() == m_customerDrinkWanted)
         {
             playerHasFinalDrink = true;
             Debug.Log("Drink contains what's needed.");

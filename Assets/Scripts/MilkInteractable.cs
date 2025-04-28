@@ -26,9 +26,11 @@ public class MilkInteractable : MonoBehaviour, IInteractable
     {
         Debug.Log("Interacted with " + gameObject.name);
         GameObject obj = GameObject.FindGameObjectWithTag("Player");
+        //GameObject obj = interactionController.;
         if (obj != null)
         {
-            cupManager = obj.GetComponent<CupManager>();
+            //cupManager = obj.GetComponent<CupManager>();
+            cupManager = interactionController.GetComponent<CupManager>();
             if (cupManager.cupContents.Contains("lid"))
             {
                 Debug.LogWarning("Cannot pour milk with a lid on!");

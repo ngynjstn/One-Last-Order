@@ -35,8 +35,7 @@ public class CoffeeInteractable : MonoBehaviour, IInteractable
         GameObject obj = GameObject.FindGameObjectWithTag("Cup");
         pickupCup = obj.GetComponent<PickupCup>();
 
-        GameObject m_cup = GameObject.FindGameObjectWithTag("Player");
-        cupManager = m_cup.GetComponent<CupManager>();
+        cupManager = interactionController.GetComponent<CupManager>();
         // Check if frothing is happening
         if (FrotherInteractable.IsFrothing)
         {
