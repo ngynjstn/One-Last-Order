@@ -13,7 +13,7 @@ public class CafeAudioManager : MonoBehaviour
     public float cafeMusicTargetVolume = 1.0f; 
 
     private bool playerInsideCafeZone = false;
-    private float initialCafeVolume = 0.079f; //start volume?
+    private float initialCafeVolume = 0.155f; //start volume?
 
     void Start()
     {
